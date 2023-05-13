@@ -178,8 +178,6 @@ export const PersonalInformation = (props: Props) => {
           helperText={touched.country && errors.country}
         />
       </FormControl>
-
-      <button type="submit">Submit</button>
     </form>
   );
 };

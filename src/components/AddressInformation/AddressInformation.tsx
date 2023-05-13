@@ -19,13 +19,13 @@ type AddressInformationType = {
   file: string;
 };
 
-const getFileExtension = (ext: string) => {
+const getFileExtension = (file: string) => {
   // Get the last index of the dot (.) character
-  const dotIndex = ext.lastIndexOf(".");
+  const dotIndex = file.lastIndexOf(".");
 
   // Extract the extension from the file name
   if (dotIndex !== -1) {
-    const extension = ext.slice(dotIndex + 1).toLowerCase();
+    const extension = file.slice(dotIndex + 1).toLowerCase();
     return extension;
   }
 
