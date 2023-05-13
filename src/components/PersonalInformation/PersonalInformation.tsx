@@ -1,40 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   TextField,
   Select,
   MenuItem,
   InputLabel,
   FormControl,
+  Typography,
 } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers";
 import { useFormik } from "formik";
 type Props = {};
 
-export type PersonalInformationValues = {
+type PersonalInformationValues = {
   name: string;
   paternal_last_name: string;
   maternal_last_name: string;
   gender: string;
   preferred_gender: string;
-};
-
-const validateField = (
-  fieldName: keyof PersonalInformationValues,
-  values: PersonalInformationValues
-) => {
-  const errors: Partial<PersonalInformationValues> = {};
-  if (!values[fieldName]) {
-    errors[fieldName] = "Required";
-  }
-  return errors;
+  city: string;
+  state: string;
+  country: string;
 };
 
 const validation = (values: PersonalInformationValues) => {
-  let errors: Partial<PersonalInformationValues> = {};
-  Object.keys(values).forEach((field) => {
-    const fieldName = field as keyof PersonalInformationValues;
-    const fieldErrors = validateField(fieldName, values);
-    errors = { ...errors, ...fieldErrors };
-  });
+  const errors: Partial<PersonalInformationValues> = {};
+  if (!values.name) {
+    errors.name = "Required";
+  }
+  if (!values.paternal_last_name) {
+    errors.paternal_last_name = "Required";
+  }
+  if (!values.gender) {
+    errors.gender = "Required";
+  }
+
+  if (!values.city) {
+    errors.city = "Required";
+  }
+
+  if (!values.state) {
+    errors.state = "Required";
+  }
+  if (!values.country) {
+    errors.country = "Required";
+  }
+
   return errors;
 };
 
@@ -46,10 +56,13 @@ export const PersonalInformation = (props: Props) => {
       maternal_last_name: "",
       gender: "",
       preferred_gender: "",
+      city: "",
+      state: "",
+      country: "",
     },
     validate: validation,
     onSubmit: (value) => {
-      console.log();
+      alert(JSON.stringify(value));
     },
   });
 
@@ -125,6 +138,47 @@ export const PersonalInformation = (props: Props) => {
           helperText={touched.preferred_gender && errors.preferred_gender}
         />
       )}
+      {/* Date of birth */}
+
+      {/* Place of birth */}
+
+      <FormControl fullWidth>
+        <Typography variant="h5">Place of birth</Typography>
+        <TextField
+          required
+          id="city"
+          name="city"
+          label="City"
+          value={values.city}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          error={touched.city && Boolean(errors.city)}
+          helperText={touched.city && errors.city}
+        />
+        <TextField
+          required
+          id="state"
+          name="state"
+          label="state"
+          value={values.state}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          error={touched.state && Boolean(errors.state)}
+          helperText={touched.state && errors.state}
+        />
+        <TextField
+          required
+          id="country"
+          name="country"
+          label="country"
+          value={values.country}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          error={touched.country && Boolean(errors.country)}
+          helperText={touched.country && errors.country}
+        />
+      </FormControl>
+
       <button type="submit">Submit</button>
     </form>
   );
