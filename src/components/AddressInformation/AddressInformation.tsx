@@ -6,11 +6,7 @@ import {
   Input,
 } from "@mui/material";
 import React from "react";
-import { useFormik } from "formik";
-import {
-  AddressInformationProps,
-  AddressInformationValues,
-} from "../../interfaces/useAddressInformationValidation";
+import { AddressInformationProps } from "../../interfaces/AddressInformationValidation";
 
 export const AddressInformation = ({
   errors,
@@ -75,17 +71,17 @@ export const AddressInformation = ({
           helperText={touched.colony && errors.colony}
         />
         <TextField
-          id="city"
-          name="city"
+          id="city_current"
+          name="city_current"
           label="City"
-          value={values.city}
+          value={values.city_current}
           onChange={handleChange}
         />
         <TextField
-          id="state"
-          name="state"
+          id="state_current"
+          name="state_current"
           label="State"
-          value={values.state}
+          value={values.state_current}
           onChange={handleChange}
         />
         <TextField
@@ -101,7 +97,6 @@ export const AddressInformation = ({
           name="file"
           style={{ display: "none" }}
           value={values.file}
-          onBlur={handleBlur}
           onChange={handleChange}
           error={touched.file && Boolean(errors.file)}
         />

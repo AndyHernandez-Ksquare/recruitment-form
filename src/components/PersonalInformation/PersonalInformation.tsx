@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   TextField,
   Select,
@@ -8,37 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import { useFormik } from "formik";
-import {
-  PersonalInformationProps,
-  PersonalInformationValues,
-} from "../../interfaces/usePersonalInformation";
-
-const validation = (values: PersonalInformationValues) => {
-  const errors: Partial<PersonalInformationValues> = {};
-  if (!values.name) {
-    errors.name = "Required";
-  }
-  if (!values.paternal_last_name) {
-    errors.paternal_last_name = "Required";
-  }
-  if (!values.gender) {
-    errors.gender = "Required";
-  }
-
-  if (!values.city) {
-    errors.city = "Required";
-  }
-
-  if (!values.state) {
-    errors.state = "Required";
-  }
-  if (!values.country) {
-    errors.country = "Required";
-  }
-
-  return errors;
-};
+import { PersonalInformationProps } from "../../interfaces/PersonalInformation";
 
 export const PersonalInformation = ({
   errors,
@@ -124,31 +94,31 @@ export const PersonalInformation = ({
         <Typography variant="h5">Place of birth</Typography>
         <TextField
           required
-          id="city"
-          name="city"
+          id="city_birth"
+          name="city_birth"
           label="City"
-          value={values.city}
+          value={values.city_birth}
           onBlur={handleBlur}
           onChange={handleChange}
-          error={touched.city && Boolean(errors.city)}
-          helperText={touched.city && errors.city}
+          error={touched.city_birth && Boolean(errors.city_birth)}
+          helperText={touched.city_birth && errors.city_birth}
         />
         <TextField
           required
-          id="state"
-          name="state"
-          label="state"
-          value={values.state}
+          id="state_birth"
+          name="state_birth"
+          label="State"
+          value={values.state_birth}
           onBlur={handleBlur}
           onChange={handleChange}
-          error={touched.state && Boolean(errors.state)}
-          helperText={touched.state && errors.state}
+          error={touched.state_birth && Boolean(errors.state_birth)}
+          helperText={touched.state_birth && errors.state_birth}
         />
         <TextField
           required
           id="country"
           name="country"
-          label="country"
+          label="Country"
           value={values.country}
           onBlur={handleBlur}
           onChange={handleChange}

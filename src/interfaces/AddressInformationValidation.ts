@@ -5,8 +5,8 @@ export type AddressInformationValues = {
   streetA: string;
   streetB: string;
   colony: string;
-  city: string;
-  state: string;
+  city_current: string;
+  state_current: string;
   postalCode: string;
   file: string;
 };

@@ -7,46 +7,17 @@ import {
   FormControl,
   Typography,
 } from "@mui/material";
-import { useFormik } from "formik";
+import { AddressExtraInfoProps } from "../../interfaces/AddressExtraInfo";
 
-type Props = {};
-
-type AddressExtraInfoType = {
-  residencyType: string;
-  residencyTypeOther: string;
-  peopleInHouse: string;
-};
-
-const validation = (values: AddressExtraInfoType) => {
-  const errors: Partial<AddressExtraInfoType> = {};
-  if (!values.residencyType) {
-    errors.residencyType = "Required";
-  }
-  if (!values.peopleInHouse) {
-    errors.peopleInHouse = "Required";
-  }
-
-  return errors;
-};
-
-export const AddressExtraInfo = (props: Props) => {
-  const formik = useFormik<AddressExtraInfoType>({
-    initialValues: {
-      residencyType: "",
-      residencyTypeOther: "",
-      peopleInHouse: "",
-    },
-    validate: validation,
-    onSubmit: (value) => {
-      alert(JSON.stringify(value));
-    },
-  });
-
-  const { errors, touched, values, handleChange, handleBlur, handleSubmit } =
-    formik;
-
+export const AddressExtraInfo = ({
+  errors,
+  touched,
+  values,
+  handleChange,
+  handleBlur,
+}: AddressExtraInfoProps) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <Typography variant="body1">Extra information</Typography>
 
       {/* Type of residency */}
@@ -109,7 +80,6 @@ export const AddressExtraInfo = (props: Props) => {
           </MenuItem>
         </Select>
       </FormControl>
-      <button type="submit">Submit</button>
     </form>
   );
 };

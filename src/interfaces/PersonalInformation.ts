@@ -6,8 +6,8 @@ export interface PersonalInformationValues {
   maternal_last_name: string;
   gender: string;
   preferred_gender: string;
-  city: string;
-  state: string;
+  city_birth: string;
+  state_birth: string;
   country: string;
 }
 

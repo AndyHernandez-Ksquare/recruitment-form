@@ -1,0 +1,1 @@
+export { ExtraPersonalInfo } from "./ExtraPersonalInfo";

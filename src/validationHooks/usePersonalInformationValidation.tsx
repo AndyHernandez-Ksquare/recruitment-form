@@ -1,5 +1,4 @@
-import { useFormik } from "formik";
-import { PersonalInformationValues } from "../interfaces/usePersonalInformation";
+import { PersonalInformationValues } from "../interfaces/PersonalInformation";
 
 const usePersonalInformationValidation = () => {
   let valuesPersonalInformation: PersonalInformationValues = {
@@ -8,8 +7,8 @@ const usePersonalInformationValidation = () => {
     maternal_last_name: "",
     gender: "",
     preferred_gender: "",
-    city: "",
-    state: "",
+    city_birth: "",
+    state_birth: "",
     country: "",
   };
 
@@ -25,12 +24,12 @@ const usePersonalInformationValidation = () => {
       errors.gender = "Required";
     }
 
-    if (!values.city) {
-      errors.city = "Required";
+    if (!values.city_birth) {
+      errors.city_birth = "Required";
     }
 
-    if (!values.state) {
-      errors.state = "Required";
+    if (!values.state_birth) {
+      errors.state_birth = "Required";
     }
     if (!values.country) {
       errors.country = "Required";

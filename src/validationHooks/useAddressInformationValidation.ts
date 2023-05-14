@@ -1,13 +1,12 @@
-import { AddressInformationValues } from "./../interfaces/useAddressInformationValidation";
-import { useFormik } from "formik";
+import { AddressInformationValues } from "../interfaces/AddressInformationValidation";
 const useAddressInformationValidation = () => {
   let valuesAddresslInformation: AddressInformationValues = {
     street: "",
     streetA: "",
     streetB: "",
     colony: "",
-    city: "",
-    state: "",
+    city_current: "",
+    state_current: "",
     postalCode: "",
     file: "",
   };
