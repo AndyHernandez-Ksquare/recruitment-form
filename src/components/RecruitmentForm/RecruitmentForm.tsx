@@ -5,23 +5,42 @@ import { AddressInformation } from "../AddressInformation";
 import { AddressExtraInfo } from "../AddressExtraInfo";
 import { useFormik } from "formik";
 import { PersonalInformationValues } from "../../interfaces/usePersonalInformation";
-import PersonalInformationValidation from "../../validationHooks/usePersonalInformationValidation";
+import usePersonalInformationValidation from "../../validationHooks/usePersonalInformationValidation";
+import useAddressInformationValidation from "../../validationHooks/useAddressInformationValidation";
+import { AddressInformationValues } from "../../interfaces/useAddressInformationValidation";
+type FormValues = PersonalInformationValues & AddressInformationValues;
 
 export const RecruitmentForm = () => {
   // Used let so that I can change the value of values variable later on
-  let { validation, values } = PersonalInformationValidation();
+  let { valuesPersonalInformation, validationPersonalInformation } =
+    usePersonalInformationValidation();
 
-  const formik = useFormik<PersonalInformationValues>({
-    initialValues: values,
-    validate: validation,
+  let { valuesAddresslInformation, validationAddressInformation } =
+    useAddressInformationValidation();
+
+  const combinedValidation = (values: FormValues) => {
+    const errorsFromValidation = validationPersonalInformation(values);
+    const errorsFromValidation2 = validationAddressInformation(values);
+
+    return {
+      ...errorsFromValidation,
+      ...errorsFromValidation2,
+    };
+  };
+
+  const formik = useFormik<FormValues>({
+    initialValues: {
+      ...valuesPersonalInformation,
+      ...valuesAddresslInformation,
+    },
+    validate: combinedValidation,
     onSubmit: (value) => {
       alert(JSON.stringify(value));
     },
   });
 
-  values = formik.values; // Update values after formik initialization
-
-  const { errors, touched, handleChange, handleBlur, handleSubmit } = formik;
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    formik;
 
   return (
     <Box>
@@ -34,10 +53,16 @@ export const RecruitmentForm = () => {
           handleChange={handleChange}
           handleBlur={handleBlur}
         />
+        <AddressInformation
+          errors={errors}
+          touched={touched}
+          values={values}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+        />
+        {/* <AddressExtraInfo /> */}
         <button type="submit">Submit</button>
       </form>
-      {/* <AddressInformation /> */}
-      {/* <AddressExtraInfo /> */}
     </Box>
   );
 };

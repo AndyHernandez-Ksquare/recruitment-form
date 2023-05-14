@@ -7,74 +7,20 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useFormik } from "formik";
+import {
+  AddressInformationProps,
+  AddressInformationValues,
+} from "../../interfaces/useAddressInformationValidation";
 
-type AddressInformationType = {
-  street: string;
-  streetA: string;
-  streetB: string;
-  colony: string;
-  city: string;
-  state: string;
-  postalCode: string;
-  file: string;
-};
-
-const getFileExtension = (file: string) => {
-  // Get the last index of the dot (.) character
-  const dotIndex = file.lastIndexOf(".");
-
-  // Extract the extension from the file name
-  if (dotIndex !== -1) {
-    const extension = file.slice(dotIndex + 1).toLowerCase();
-    return extension;
-  }
-
-  return "";
-};
-
-const validation = (values: AddressInformationType) => {
-  const errors: Partial<AddressInformationType> = {};
-  if (!values.street) {
-    errors.street = "Required";
-  }
-  if (!values.streetA) {
-    errors.streetA = "Required";
-  }
-  if (!values.colony) {
-    errors.colony = "Required";
-  }
-  const fileExtension = getFileExtension(values.file);
-  if (!["pdf", "jpg", "png"].includes(fileExtension)) {
-    errors.file = "Invalid file type. Please upload a PDF, JPG, or PNG file.";
-  }
-  return errors;
-};
-
-export const AddressInformation = () => {
-  const formik = useFormik<AddressInformationType>({
-    initialValues: {
-      street: "",
-      streetA: "",
-      streetB: "",
-      colony: "",
-      city: "",
-      state: "",
-      postalCode: "",
-      file: "",
-    },
-    validate: validation,
-    onSubmit: (value) => {
-      console.log(JSON.stringify(value));
-    },
-  });
-
-  const { errors, touched, values, handleChange, handleBlur, handleSubmit } =
-    formik;
-
-  console.log(errors);
-
+export const AddressInformation = ({
+  errors,
+  touched,
+  values,
+  handleChange,
+  handleBlur,
+}: AddressInformationProps) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <Typography variant="subtitle1">
         Please provide your current address as we're going to deliver important
         documents later in the process
@@ -172,8 +118,6 @@ export const AddressInformation = () => {
           </Button>
         </label>
       </FormControl>
-
-      <button type="submit">Submit</button>
     </form>
   );
 };

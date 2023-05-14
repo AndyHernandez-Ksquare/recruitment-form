@@ -1,7 +1,8 @@
+import { useFormik } from "formik";
 import { PersonalInformationValues } from "../interfaces/usePersonalInformation";
 
-const PersonalInformationValidation = () => {
-  let values: PersonalInformationValues = {
+const usePersonalInformationValidation = () => {
+  let valuesPersonalInformation: PersonalInformationValues = {
     name: "",
     paternal_last_name: "",
     maternal_last_name: "",
@@ -12,7 +13,7 @@ const PersonalInformationValidation = () => {
     country: "",
   };
 
-  const validation = (values: PersonalInformationValues) => {
+  const validationPersonalInformation = (values: PersonalInformationValues) => {
     const errors: Partial<PersonalInformationValues> = {};
     if (!values.name) {
       errors.name = "Required";
@@ -38,6 +39,6 @@ const PersonalInformationValidation = () => {
     return errors;
   };
 
-  return { values, validation };
+  return { valuesPersonalInformation, validationPersonalInformation };
 };
-export default PersonalInformationValidation;
+export default usePersonalInformationValidation;

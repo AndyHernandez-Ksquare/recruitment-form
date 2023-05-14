@@ -1,1 +1,1 @@
-export { RecruitmentForm as default } from './RecruitmentForm'
+export { RecruitmentForm } from "./RecruitmentForm";

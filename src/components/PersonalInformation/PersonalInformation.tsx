@@ -9,18 +9,10 @@ import {
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useFormik } from "formik";
-import { PersonalInformationProps } from "../../interfaces/usePersonalInformation";
-
-type PersonalInformationValues = {
-  name: string;
-  paternal_last_name: string;
-  maternal_last_name: string;
-  gender: string;
-  preferred_gender: string;
-  city: string;
-  state: string;
-  country: string;
-};
+import {
+  PersonalInformationProps,
+  PersonalInformationValues,
+} from "../../interfaces/usePersonalInformation";
 
 const validation = (values: PersonalInformationValues) => {
   const errors: Partial<PersonalInformationValues> = {};
@@ -55,23 +47,6 @@ export const PersonalInformation = ({
   handleChange,
   handleBlur,
 }: PersonalInformationProps) => {
-  const formik = useFormik<PersonalInformationValues>({
-    initialValues: {
-      name: "",
-      paternal_last_name: "",
-      maternal_last_name: "",
-      gender: "",
-      preferred_gender: "",
-      city: "",
-      state: "",
-      country: "",
-    },
-    validate: validation,
-    onSubmit: (value) => {
-      alert(JSON.stringify(value));
-    },
-  });
-
   return (
     <form style={{ marginTop: "1rem" }}>
       {/* Name */}
