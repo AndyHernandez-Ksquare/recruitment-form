@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useFormik } from "formik";
-type Props = {};
+import { PersonalInformationProps } from "../../interfaces/usePersonalInformation";
 
 type PersonalInformationValues = {
   name: string;
@@ -48,7 +48,13 @@ const validation = (values: PersonalInformationValues) => {
   return errors;
 };
 
-export const PersonalInformation = (props: Props) => {
+export const PersonalInformation = ({
+  errors,
+  touched,
+  values,
+  handleChange,
+  handleBlur,
+}: PersonalInformationProps) => {
   const formik = useFormik<PersonalInformationValues>({
     initialValues: {
       name: "",
@@ -66,11 +72,8 @@ export const PersonalInformation = (props: Props) => {
     },
   });
 
-  const { errors, touched, values, handleChange, handleBlur, handleSubmit } =
-    formik;
-
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: "1rem" }}>
+    <form style={{ marginTop: "1rem" }}>
       {/* Name */}
       <TextField
         required
