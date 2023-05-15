@@ -80,10 +80,7 @@ export const PersonalInformation = ({
           name="preferred_gender"
           label="Preferred Gender"
           value={values.preferred_gender}
-          onBlur={handleBlur}
           onChange={handleChange}
-          error={touched.preferred_gender && Boolean(errors.preferred_gender)}
-          helperText={touched.preferred_gender && errors.preferred_gender}
         />
       )}
       {/* Date of birth */}

@@ -1,4 +1,5 @@
-import { AddressInformationValues } from "../interfaces/AddressInformationValidation";
+import { AddressInformationValues } from "../interfaces/AddressInformation";
+import getFileExtension from "../functions/getFileExtension";
 const useAddressInformationValidation = () => {
   let valuesAddresslInformation: AddressInformationValues = {
     street: "",
@@ -8,20 +9,7 @@ const useAddressInformationValidation = () => {
     city_current: "",
     state_current: "",
     postalCode: "",
-    file: "",
-  };
-
-  const getFileExtension = (file: string) => {
-    // Get the last index of the dot (.) character
-    const dotIndex = file.lastIndexOf(".");
-
-    // Extract the extension from the file name
-    if (dotIndex !== -1) {
-      const extension = file.slice(dotIndex + 1).toLowerCase();
-      return extension;
-    }
-
-    return "";
+    addressProof: "",
   };
 
   const validationAddressInformation = (values: AddressInformationValues) => {
@@ -35,9 +23,10 @@ const useAddressInformationValidation = () => {
     if (!values.colony) {
       errors.colony = "Required";
     }
-    const fileExtension = getFileExtension(values.file);
+    const fileExtension = getFileExtension(values.addressProof);
     if (!["pdf", "jpg", "png"].includes(fileExtension)) {
-      errors.file = "Invalid file type. Please upload a PDF, JPG, or PNG file.";
+      errors.addressProof =
+        "Invalid file type. Please upload a PDF, JPG, or PNG file.";
     }
     return errors;
   };

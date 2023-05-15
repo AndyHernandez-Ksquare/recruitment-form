@@ -6,7 +6,7 @@ import {
   Input,
 } from "@mui/material";
 import React from "react";
-import { AddressInformationProps } from "../../interfaces/AddressInformationValidation";
+import { AddressInformationProps } from "../../interfaces/AddressInformation";
 
 export const AddressInformation = ({
   errors,
@@ -93,22 +93,24 @@ export const AddressInformation = ({
         />
         <Input
           type="file"
-          id="upload"
-          name="file"
+          id="addressProof"
+          name="addressProof"
           style={{ display: "none" }}
-          value={values.file}
+          value={values.addressProof}
           onChange={handleChange}
-          error={touched.file && Boolean(errors.file)}
+          error={touched.addressProof && Boolean(errors.addressProof)}
         />
 
-        <label htmlFor="upload">
+        <label htmlFor="addressProof">
           <Button
-            sx={{ backgroundColor: errors.file && "red" }}
+            sx={{ backgroundColor: errors.addressProof && "red" }}
             variant="contained"
             component="span"
           >
-            {errors.file
-              ? "Must be pdf, jpg or png"
+            {errors.addressProof
+              ? "Must be pdf, jpg, or png"
+              : values.addressProof
+              ? "File uploaded!"
               : "Upload Proof of Address"}
           </Button>
         </label>

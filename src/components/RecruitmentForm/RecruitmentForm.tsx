@@ -7,25 +7,30 @@ import { useFormik } from "formik";
 import { PersonalInformationValues } from "../../interfaces/PersonalInformation";
 import usePersonalInformationValidation from "../../validationHooks/usePersonalInformationValidation";
 import useAddressInformationValidation from "../../validationHooks/useAddressInformationValidation";
-import { AddressInformationValues } from "../../interfaces/AddressInformationValidation";
+import { AddressInformationValues } from "../../interfaces/AddressInformation";
 import { AddressExtraInfoValues } from "../../interfaces/AddressExtraInfo";
-import useAddressExtraInfo from "../../validationHooks/useAddressExtraInfoValidation";
 import useAddressExtraInfoValidation from "../../validationHooks/useAddressExtraInfoValidation";
+import useExtraPersonalInfoValidation from "../../validationHooks/useExtraPersonalInfoValidation";
+import { ExtraPersonalInfoValues } from "../../interfaces/ExtraPersonalInfo";
+import { ExtraPersonalInfo } from "../ExtraPersonalInfo";
 // This type is important so that I can pass the same props to all components
 type FormValues = PersonalInformationValues &
   AddressInformationValues &
-  AddressExtraInfoValues;
+  AddressExtraInfoValues &
+  ExtraPersonalInfoValues;
 
 export const RecruitmentForm = () => {
-  // Used let so that I can change the value of values variable later on
-  let { valuesPersonalInformation, validationPersonalInformation } =
+  const { valuesPersonalInformation, validationPersonalInformation } =
     usePersonalInformationValidation();
 
-  let { valuesAddresslInformation, validationAddressInformation } =
+  const { valuesAddresslInformation, validationAddressInformation } =
     useAddressInformationValidation();
 
-  let { valuesAddressExtraInfo, validationAddressExtraInfo } =
+  const { valuesAddressExtraInfo, validationAddressExtraInfo } =
     useAddressExtraInfoValidation();
+
+  const { valuesExtraPersonalInfo, validationExtraPersonalInfo } =
+    useExtraPersonalInfoValidation();
 
   const combinedValidation = (values: FormValues) => {
     const errorsFromPersonalInformationValidation =
@@ -34,11 +39,13 @@ export const RecruitmentForm = () => {
       validationAddressInformation(values);
     const errorsFromAddressExtraInfoValidation =
       validationAddressExtraInfo(values);
+    const errorsFromExtraPersonalInfo = validationExtraPersonalInfo(values);
 
     return {
       ...errorsFromPersonalInformationValidation,
       ...errorsFromAddressInformationValidation,
       ...errorsFromAddressExtraInfoValidation,
+      ...errorsFromExtraPersonalInfo,
     };
   };
 
@@ -47,6 +54,7 @@ export const RecruitmentForm = () => {
       ...valuesPersonalInformation,
       ...valuesAddresslInformation,
       ...valuesAddressExtraInfo,
+      ...valuesExtraPersonalInfo,
     },
     validate: combinedValidation,
     onSubmit: (value) => {
@@ -76,6 +84,13 @@ export const RecruitmentForm = () => {
           handleBlur={handleBlur}
         />
         <AddressExtraInfo
+          errors={errors}
+          touched={touched}
+          values={values}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+        />
+        <ExtraPersonalInfo
           errors={errors}
           touched={touched}
           values={values}

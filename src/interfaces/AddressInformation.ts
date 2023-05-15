@@ -3,12 +3,12 @@ import { FormikErrors, FormikTouched } from "formik";
 export type AddressInformationValues = {
   street: string;
   streetA: string;
-  streetB: string;
+  streetB?: string;
   colony: string;
-  city_current: string;
-  state_current: string;
-  postalCode: string;
-  file: string;
+  city_current?: string;
+  state_current?: string;
+  postalCode?: string;
+  addressProof: string;
 };
 
 export interface AddressInformationProps {

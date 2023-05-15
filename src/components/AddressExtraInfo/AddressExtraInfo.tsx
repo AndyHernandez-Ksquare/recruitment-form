@@ -6,6 +6,8 @@ import {
   InputLabel,
   FormControl,
   Typography,
+  Input,
+  Button,
 } from "@mui/material";
 import { AddressExtraInfoProps } from "../../interfaces/AddressExtraInfo";
 
@@ -79,6 +81,60 @@ export const AddressExtraInfo = ({
             I live with my significant other and kids
           </MenuItem>
         </Select>
+      </FormControl>
+
+      {values.country.toLowerCase() === "mexico" ? (
+        <TextField
+          required
+          id="identification"
+          name="identification"
+          label="CURP"
+          value={values.identification}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          error={touched.identification && Boolean(errors.identification)}
+          helperText={touched.identification && errors.identification}
+        />
+      ) : (
+        <TextField
+          required
+          id="identification"
+          name="identification"
+          label="Passport"
+          value={values.identification}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          error={touched.identification && Boolean(errors.identification)}
+          helperText={touched.identification && errors.identification}
+        />
+      )}
+
+      <FormControl>
+        <Input
+          type="file"
+          id="identificationProof"
+          name="identificationProof"
+          style={{ display: "none" }}
+          value={values.identificationProof}
+          onChange={handleChange}
+          error={
+            touched.identificationProof && Boolean(errors.identificationProof)
+          }
+        />
+
+        <label htmlFor="identificationProof">
+          <Button
+            sx={{ backgroundColor: errors.identificationProof && "red" }}
+            variant="contained"
+            component="span"
+          >
+            {errors.identificationProof
+              ? "Must be pdf, jpg, or png"
+              : values.identificationProof
+              ? "File uploaded!"
+              : "Upload Proof of Identification"}
+          </Button>
+        </label>
       </FormControl>
     </form>
   );

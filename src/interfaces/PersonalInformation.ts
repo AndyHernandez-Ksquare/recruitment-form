@@ -3,7 +3,7 @@ import { FormikErrors, FormikTouched } from "formik";
 export interface PersonalInformationValues {
   name: string;
   paternal_last_name: string;
-  maternal_last_name: string;
+  maternal_last_name?: string;
   gender: string;
   preferred_gender: string;
   city_birth: string;
