@@ -6,6 +6,22 @@ export interface ExtraPersonalInfoValues {
   altEmail: string;
   howDiscoveredUs: string;
   howDiscoveredUsOther?: string;
+  mostLikeSD: string;
+  highestDegree: string;
+  highestDegreeOther?: string;
+  universityName?: string;
+  universityCity?: string;
+  universityState?: string;
+  universityCountry?: string;
+  nameOfDegree?: string;
+  finishedDegree?: string;
+  proofOfDegree?: string;
+  proffesionalLicense?: string;
+  proofOfLicense?: string;
+  scholarship?: string;
+  scholarshipLevel?: string;
+  scholarshipKind?: string;
+  scholarshipDuration?: number;
 }
 
 export interface ExtraPersonalInfoProps {

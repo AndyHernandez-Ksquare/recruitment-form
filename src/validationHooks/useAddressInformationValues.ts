@@ -1,6 +1,6 @@
 import { AddressInformationValues } from "../interfaces/AddressInformation";
 
-const useAddressInformationValidation = () => {
+const useAddressInformationValues = () => {
   let valuesAddresslInformation: AddressInformationValues = {
     street: "",
     streetA: "",
@@ -14,4 +14,4 @@ const useAddressInformationValidation = () => {
 
   return { valuesAddresslInformation };
 };
-export default useAddressInformationValidation;
+export default useAddressInformationValues;

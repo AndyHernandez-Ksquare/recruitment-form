@@ -5,12 +5,12 @@ import { AddressInformation } from "../AddressInformation";
 import { AddressExtraInfo } from "../AddressExtraInfo";
 import { useFormik } from "formik";
 import { PersonalInformationValues } from "../../interfaces/PersonalInformation";
-import usePersonalInformationValidation from "../../validationHooks/usePersonalInformationValues";
-import useAddressInformationValidation from "../../validationHooks/useAddressInformationValues";
+import usePersonalInformationValues from "../../validationHooks/usePersonalInformationValues";
+import useAddressInformationValues from "../../validationHooks/useAddressInformationValues";
 import { AddressInformationValues } from "../../interfaces/AddressInformation";
 import { AddressExtraInfoValues } from "../../interfaces/AddressExtraInfo";
-import useAddressExtraInfoValidation from "../../validationHooks/useAddressExtraInfoValidation";
-import useExtraPersonalInfoValidation from "../../validationHooks/useExtraPersonalInfoValidation";
+import useAddressExtraInfoValues from "../../validationHooks/useAddressExtraInfoValues";
+import useExtraPersonalInfoValues from "../../validationHooks/useExtraPersonalInfoValues";
 import { ExtraPersonalInfoValues } from "../../interfaces/ExtraPersonalInfo";
 import { ExtraPersonalInfo } from "../ExtraPersonalInfo";
 import * as Yup from "yup";
@@ -22,11 +22,13 @@ type FormValues = PersonalInformationValues &
   ExtraPersonalInfoValues;
 
 export const RecruitmentForm = () => {
-  const { valuesPersonalInformation } = usePersonalInformationValidation();
+  const { valuesPersonalInformation } = usePersonalInformationValues();
 
-  const { valuesAddresslInformation } = useAddressInformationValidation();
+  const { valuesAddresslInformation } = useAddressInformationValues();
 
-  const { valuesAddressExtraInfo } = useAddressExtraInfoValidation();
+  const { valuesAddressExtraInfo } = useAddressExtraInfoValues();
+
+  const { valuesExtraPersonalInfo } = useExtraPersonalInfoValues();
 
   const validationSchema = Yup.object({
     // Personal Info
@@ -42,41 +44,19 @@ export const RecruitmentForm = () => {
     streetA: Yup.string().required("StreetA is required"),
     colony: Yup.string().required("Colony is required"),
 
-    // Address extra info
+    // Extra personal info
 
-    identification: Yup.string().required("Identification is required"),
+    email: Yup.string().email("This is not an email"),
+    altEmail: Yup.string().email("This is not an email"),
+    phone: Yup.string().matches(/^\d{1,2} \d{10}$/, "Invalid phone number"),
   });
 
-  // const { valuesExtraPersonalInfo, validationExtraPersonalInfo } =
-  //   useExtraPersonalInfoValidation();
-
-  // const combinedValidation = (values: FormValues) => {
-  //   const errorsFromPersonalInformationValidation =
-  //     validationPersonalInformation(values);
-  //   const errorsFromAddressInformationValidation =
-  //     validationAddressInformation(values);
-  //   const errorsFromAddressExtraInfoValidation =
-  //     validationAddressExtraInfo(values);
-  //   const errorsFromExtraPersonalInfo = validationExtraPersonalInfo(values);
-
-  //   return {
-  //     ...errorsFromPersonalInformationValidation,
-  //     ...errorsFromAddressInformationValidation,
-  //     ...errorsFromAddressExtraInfoValidation,
-  //     ...errorsFromExtraPersonalInfo,
-  //   };
-  // };
-
-  const formik = useFormik<
-    PersonalInformationValues &
-      AddressInformationValues &
-      AddressExtraInfoValues
-  >({
+  const formik = useFormik<FormValues>({
     initialValues: {
       ...valuesPersonalInformation,
       ...valuesAddresslInformation,
       ...valuesAddressExtraInfo,
-      // ...valuesExtraPersonalInfo,
+      ...valuesExtraPersonalInfo,
     },
     // validate: combinedValidation,
     validationSchema: validationSchema,
@@ -91,7 +71,6 @@ export const RecruitmentForm = () => {
   return (
     <Box>
       <form onSubmit={handleSubmit}>
-        {" "}
         <PersonalInformation
           errors={errors}
           touched={touched}
@@ -113,13 +92,13 @@ export const RecruitmentForm = () => {
           handleChange={handleChange}
           handleBlur={handleBlur}
         />
-        {/* <ExtraPersonalInfo
+        <ExtraPersonalInfo
           errors={errors}
           touched={touched}
           values={values}
           handleChange={handleChange}
           handleBlur={handleBlur}
-        /> */}
+        />
         <button type="submit">Submit</button>
       </form>
     </Box>

@@ -6,7 +6,6 @@ import {
   InputLabel,
   FormControl,
   Typography,
-  Input,
   Button,
 } from "@mui/material";
 import { AddressExtraInfoProps } from "../../interfaces/AddressExtraInfo";
@@ -83,43 +82,23 @@ export const AddressExtraInfo = ({
         </Select>
       </FormControl>
 
-      {values.country.toLowerCase() === "mexico" ? (
-        <TextField
-          required
-          id="identification"
-          name="identification"
-          label="CURP"
-          value={values.identification}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          error={touched.identification && Boolean(errors.identification)}
-          helperText={touched.identification && errors.identification}
-        />
-      ) : (
-        <TextField
-          required
-          id="identification"
-          name="identification"
-          label="Passport"
-          value={values.identification}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          error={touched.identification && Boolean(errors.identification)}
-          helperText={touched.identification && errors.identification}
-        />
-      )}
+      <TextField
+        id="identification"
+        name="identification"
+        label={values.country.toLowerCase() === "mexico" ? "CURP" : "Passport"}
+        value={values.identification}
+        onChange={handleChange}
+      />
 
       <FormControl>
-        <Input
+        <input
           type="file"
+          accept="application/pdf,image/jpeg,image/jpg,image/png"
           id="identificationProof"
           name="identificationProof"
           style={{ display: "none" }}
           value={values.identificationProof}
           onChange={handleChange}
-          error={
-            touched.identificationProof && Boolean(errors.identificationProof)
-          }
         />
 
         <label htmlFor="identificationProof">

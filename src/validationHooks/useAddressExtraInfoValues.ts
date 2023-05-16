@@ -1,6 +1,6 @@
 import { AddressExtraInfoValues } from "../interfaces/AddressExtraInfo";
 
-const useAddressExtraInfoValidation = () => {
+const useAddressExtraInfoValues = () => {
   let valuesAddressExtraInfo: AddressExtraInfoValues = {
     residencyType: "",
     residencyTypeOther: "",
@@ -12,4 +12,4 @@ const useAddressExtraInfoValidation = () => {
   return { valuesAddressExtraInfo };
 };
 
-export default useAddressExtraInfoValidation;
+export default useAddressExtraInfoValues;

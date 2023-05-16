@@ -18,8 +18,6 @@ export const PersonalInformation = ({
   handleChange,
   handleBlur,
 }: PersonalInformationProps) => {
-  const [useStates, setUseState] = useState<Dayjs | null>();
-
   return (
     <form style={{ marginTop: "1rem" }}>
       {/* Name */}
@@ -72,7 +70,7 @@ export const PersonalInformation = ({
           <MenuItem value="Male">Male</MenuItem>
           <MenuItem value="Female">Female</MenuItem>
           <MenuItem value="Other">Other</MenuItem>
-          <MenuItem value="Rather not to say">Rather not to say</MenuItem>
+          <MenuItem value="Rather_not_to_say">Rather not to say</MenuItem>
         </Select>
       </FormControl>
 
@@ -87,6 +85,8 @@ export const PersonalInformation = ({
         />
       )}
       {/* Date of birth */}
+      {/* Create a wrapper to pass the the handleChange, do not pass it directly
+      I will need to adapt the format of the value to the format formk is waiting in the handleChange handler*/}
       <DatePicker
         // defaultValue={dayjs("2022-04-17")}
         label="Date of birth"
