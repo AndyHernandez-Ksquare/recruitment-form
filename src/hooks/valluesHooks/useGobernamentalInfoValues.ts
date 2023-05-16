@@ -1,4 +1,4 @@
-import { GobernamentalInfoValues } from "../interfaces/GobernamentalInfo";
+import { GobernamentalInfoValues } from "../../interfaces/GobernamentalInfo";
 
 const useGobernamentalInfoValues = () => {
   let valuesAddressExtraInfo: GobernamentalInfoValues = {

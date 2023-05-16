@@ -1,4 +1,4 @@
-import { ExtraPersonalInfoValues } from "../interfaces/ExtraPersonalInfo";
+import { ExtraPersonalInfoValues } from "../../interfaces/ExtraPersonalInfo";
 
 const useExtraPersonalInfoValues = () => {
   let valuesExtraPersonalInfo: ExtraPersonalInfoValues = {

@@ -5,20 +5,23 @@ import { AddressInformation } from "../AddressInformation";
 import { AddressExtraInfo } from "../AddressExtraInfo";
 import { useFormik } from "formik";
 import { PersonalInformationValues } from "../../interfaces/PersonalInformation";
-import usePersonalInformationValues from "../../validationHooks/usePersonalInformationValues";
-import useAddressInformationValues from "../../validationHooks/useAddressInformationValues";
+import usePersonalInformationValues from "../../hooks/valluesHooks/usePersonalInformationValues";
+import useAddressInformationValues from "../../hooks/valluesHooks/useAddressInformationValues";
 import { AddressInformationValues } from "../../interfaces/AddressInformation";
 import { AddressExtraInfoValues } from "../../interfaces/AddressExtraInfo";
-import useAddressExtraInfoValues from "../../validationHooks/useAddressExtraInfoValues";
-import useExtraPersonalInfoValues from "../../validationHooks/useExtraPersonalInfoValues";
+import useAddressExtraInfoValues from "../../hooks/valluesHooks/useAddressExtraInfoValues";
+import useExtraPersonalInfoValues from "../../hooks/valluesHooks/useExtraPersonalInfoValues";
 import { ExtraPersonalInfoValues } from "../../interfaces/ExtraPersonalInfo";
 import { ExtraPersonalInfo } from "../ExtraPersonalInfo";
 import * as Yup from "yup";
 import { GobernamentalInfoValues } from "../../interfaces/GobernamentalInfo";
 import { GobernamentalInfo } from "../GobernamentalInfo";
 import { BankAccountInfoValues } from "../../interfaces/BankAccountInfo";
-import useBankAccountInfoValues from "../../validationHooks/useBankAccountInfoValues";
+import useBankAccountInfoValues from "../../hooks/valluesHooks/useBankAccountInfoValues";
 import { BankAccountInfo } from "../BankAccountInfo";
+import { Skills } from "../Skills";
+import useSkillsValues from "../../hooks/valluesHooks/useSkillsValues";
+import { SkillsValues } from "../../interfaces/Skills";
 
 // This type is important so that I can pass the same props to all components
 type FormValues = PersonalInformationValues &
@@ -26,7 +29,8 @@ type FormValues = PersonalInformationValues &
   AddressExtraInfoValues &
   GobernamentalInfoValues &
   ExtraPersonalInfoValues &
-  BankAccountInfoValues;
+  BankAccountInfoValues &
+  SkillsValues;
 
 export const RecruitmentForm = () => {
   const { valuesPersonalInformation } = usePersonalInformationValues();
@@ -38,6 +42,8 @@ export const RecruitmentForm = () => {
   const { valuesExtraPersonalInfo } = useExtraPersonalInfoValues();
 
   const { valuesBankAccountInfo } = useBankAccountInfoValues();
+
+  const { valuesSkills } = useSkillsValues();
 
   const validationSchema = Yup.object({
     // Personal Info
@@ -84,6 +90,7 @@ export const RecruitmentForm = () => {
       ...valuesAddressExtraInfo,
       ...valuesExtraPersonalInfo,
       ...valuesBankAccountInfo,
+      ...valuesSkills,
     },
     // validate: combinedValidation,
     validationSchema: validationSchema,
@@ -142,6 +149,13 @@ export const RecruitmentForm = () => {
           handleBlur={handleBlur}
         />
 
+        <Skills
+          errors={errors}
+          touched={touched}
+          values={values}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+        />
         <button type="submit">Submit</button>
       </form>
     </Box>

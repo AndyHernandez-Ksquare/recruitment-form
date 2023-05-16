@@ -1,4 +1,4 @@
-import { BankAccountInfoValues } from "../interfaces/BankAccountInfo";
+import { BankAccountInfoValues } from "../../interfaces/BankAccountInfo";
 const useBankAccountInfoValues = () => {
   let valuesBankAccountInfo: BankAccountInfoValues = {
     accountNumber: "",
