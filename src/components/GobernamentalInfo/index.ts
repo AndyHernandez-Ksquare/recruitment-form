@@ -1,0 +1,1 @@
+export { GobernamentalInfo } from "./GobernamentalInfo";

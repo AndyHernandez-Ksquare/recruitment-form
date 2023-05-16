@@ -1,18 +1,15 @@
 import { FormikErrors, FormikTouched } from "formik";
-
-export interface AddressExtraInfoValues {
-  residencyType: string;
-  residencyTypeOther: string;
-  peopleInHouse: string;
+import { PersonalInformationValues } from "./PersonalInformation";
+export interface GobernamentalInfoValues {
   identificationPassport: string;
   identificationCurp: string;
   identificationProof: string;
 }
 
-export interface AddressExtraInfoProps {
-  errors: FormikErrors<AddressExtraInfoValues>;
-  touched: FormikTouched<AddressExtraInfoValues>;
-  values: AddressExtraInfoValues;
+export interface GobernamentalInfoProps {
+  errors: FormikErrors<GobernamentalInfoValues>;
+  touched: FormikTouched<GobernamentalInfoValues>;
+  values: PersonalInformationValues & GobernamentalInfoValues;
   handleChange: {
     (e: React.ChangeEvent<any>): void;
     <T_1 = string | React.ChangeEvent<any>>(field: T_1): T_1;
