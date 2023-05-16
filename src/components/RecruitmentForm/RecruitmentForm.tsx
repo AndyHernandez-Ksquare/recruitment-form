@@ -16,13 +16,17 @@ import { ExtraPersonalInfo } from "../ExtraPersonalInfo";
 import * as Yup from "yup";
 import { GobernamentalInfoValues } from "../../interfaces/GobernamentalInfo";
 import { GobernamentalInfo } from "../GobernamentalInfo";
+import { BankAccountInfoValues } from "../../interfaces/BankAccountInfo";
+import useBankAccountInfoValues from "../../validationHooks/useBankAccountInfoValues";
+import { BankAccountInfo } from "../BankAccountInfo";
 
 // This type is important so that I can pass the same props to all components
 type FormValues = PersonalInformationValues &
   AddressInformationValues &
   AddressExtraInfoValues &
   GobernamentalInfoValues &
-  ExtraPersonalInfoValues;
+  ExtraPersonalInfoValues &
+  BankAccountInfoValues;
 
 export const RecruitmentForm = () => {
   const { valuesPersonalInformation } = usePersonalInformationValues();
@@ -32,6 +36,8 @@ export const RecruitmentForm = () => {
   const { valuesAddressExtraInfo } = useAddressExtraInfoValues();
 
   const { valuesExtraPersonalInfo } = useExtraPersonalInfoValues();
+
+  const { valuesBankAccountInfo } = useBankAccountInfoValues();
 
   const validationSchema = Yup.object({
     // Personal Info
@@ -61,6 +67,14 @@ export const RecruitmentForm = () => {
     email: Yup.string().email("This is not an email"),
     altEmail: Yup.string().email("This is not an email"),
     phone: Yup.string().matches(/^\d{1,2} \d{10}$/, "Invalid phone number"),
+
+    // Bank account info
+    accountNumber: Yup.string().matches(
+      /^[A-Z0-9]+$/,
+      "This is not a valid account number"
+    ),
+
+    CLABE: Yup.string().matches(/^\d{18}$/, "This is not a valid CLABE"),
   });
 
   const formik = useFormik<FormValues>({
@@ -69,6 +83,7 @@ export const RecruitmentForm = () => {
       ...valuesAddresslInformation,
       ...valuesAddressExtraInfo,
       ...valuesExtraPersonalInfo,
+      ...valuesBankAccountInfo,
     },
     // validate: combinedValidation,
     validationSchema: validationSchema,
@@ -118,6 +133,15 @@ export const RecruitmentForm = () => {
           handleChange={handleChange}
           handleBlur={handleBlur}
         />
+
+        <BankAccountInfo
+          errors={errors}
+          touched={touched}
+          values={values}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+        />
+
         <button type="submit">Submit</button>
       </form>
     </Box>
