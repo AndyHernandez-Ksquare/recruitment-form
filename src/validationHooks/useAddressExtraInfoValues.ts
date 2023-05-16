@@ -5,7 +5,8 @@ const useAddressExtraInfoValues = () => {
     residencyType: "",
     residencyTypeOther: "",
     peopleInHouse: "",
-    identification: "",
+    identificationCurp: "",
+    identificationPassport: "",
     identificationProof: "",
   };
 

@@ -82,13 +82,36 @@ export const AddressExtraInfo = ({
         </Select>
       </FormControl>
 
-      <TextField
-        id="identification"
-        name="identification"
-        label={values.country.toLowerCase() === "mexico" ? "CURP" : "Passport"}
-        value={values.identification}
-        onChange={handleChange}
-      />
+      {values.country.toLowerCase() === "mexico" ? (
+        <TextField
+          id="identificationCurp"
+          name="identificationCurp"
+          label="CURP"
+          value={values.identificationCurp}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={
+            touched.identificationCurp && Boolean(errors.identificationCurp)
+          }
+          helperText={touched.identificationCurp && errors.identificationCurp}
+        />
+      ) : (
+        <TextField
+          id="identificationPassport"
+          name="identificationPassport"
+          label="Passport"
+          value={values.identificationPassport}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={
+            touched.identificationPassport &&
+            Boolean(errors.identificationPassport)
+          }
+          helperText={
+            touched.identificationPassport && errors.identificationPassport
+          }
+        />
+      )}
 
       <FormControl>
         <input

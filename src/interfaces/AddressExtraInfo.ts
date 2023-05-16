@@ -5,7 +5,8 @@ export interface AddressExtraInfoValues {
   residencyType: string;
   residencyTypeOther: string;
   peopleInHouse: string;
-  identification: string;
+  identificationPassport: string;
+  identificationCurp: string;
   identificationProof: string;
 }
 

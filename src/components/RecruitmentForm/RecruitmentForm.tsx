@@ -44,8 +44,17 @@ export const RecruitmentForm = () => {
     streetA: Yup.string().required("StreetA is required"),
     colony: Yup.string().required("Colony is required"),
 
-    // Extra personal info
+    // Address extra info
+    identificationCurp: Yup.string().matches(
+      /^[A-Z0-9]{18}$/,
+      "This is not a valid CURP document"
+    ),
+    identificationPassport: Yup.string().matches(
+      /^[A-Z0-9]{6,9}$/,
+      "This is not a valid passport document"
+    ),
 
+    // Extra personal info
     email: Yup.string().email("This is not an email"),
     altEmail: Yup.string().email("This is not an email"),
     phone: Yup.string().matches(/^\d{1,2} \d{10}$/, "Invalid phone number"),
