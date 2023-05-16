@@ -3,11 +3,10 @@ import {
   TextField,
   FormControl,
   Button,
-  Input,
+  InputLabel,
 } from "@mui/material";
 import React from "react";
-import { AddressInformationProps } from "../../interfaces/AddressInformationValidation";
-
+import { AddressInformationProps } from "../../interfaces/AddressInformation";
 export const AddressInformation = ({
   errors,
   touched,
@@ -91,28 +90,22 @@ export const AddressInformation = ({
           value={values.postalCode}
           onChange={handleChange}
         />
-        <Input
+        <input
           type="file"
-          id="upload"
-          name="file"
+          accept="application/pdf,image/jpeg,image/jpg,image/png"
+          id="addressProof"
+          name="addressProof"
           style={{ display: "none" }}
-          value={values.file}
+          value={values.addressProof}
           onChange={handleChange}
-          error={touched.file && Boolean(errors.file)}
         />
-
-        <label htmlFor="upload">
-          <Button
-            sx={{ backgroundColor: errors.file && "red" }}
-            variant="contained"
-            component="span"
-          >
-            {errors.file
-              ? "Must be pdf, jpg or png"
-              : "Upload Proof of Address"}
-          </Button>
-        </label>
       </FormControl>
+
+      <InputLabel htmlFor="addressProof">
+        <Button variant="contained" component="span">
+          {values.addressProof ? "File uploaded!" : "Upload Proof of Address"}
+        </Button>
+      </InputLabel>
     </form>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TextField,
   Select,
@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { PersonalInformationProps } from "../../interfaces/PersonalInformation";
+import dayjs, { Dayjs } from "dayjs";
 
 export const PersonalInformation = ({
   errors,
@@ -69,7 +70,7 @@ export const PersonalInformation = ({
           <MenuItem value="Male">Male</MenuItem>
           <MenuItem value="Female">Female</MenuItem>
           <MenuItem value="Other">Other</MenuItem>
-          <MenuItem value="Rather not to say">Rather not to say</MenuItem>
+          <MenuItem value="Rather_not_to_say">Rather not to say</MenuItem>
         </Select>
       </FormControl>
 
@@ -80,13 +81,22 @@ export const PersonalInformation = ({
           name="preferred_gender"
           label="Preferred Gender"
           value={values.preferred_gender}
-          onBlur={handleBlur}
           onChange={handleChange}
-          error={touched.preferred_gender && Boolean(errors.preferred_gender)}
-          helperText={touched.preferred_gender && errors.preferred_gender}
         />
       )}
       {/* Date of birth */}
+      {/* Create a wrapper to pass the the handleChange, do not pass it directly
+      I will need to adapt the format of the value to the format formk is waiting in the handleChange handler*/}
+      <DatePicker
+        // defaultValue={dayjs("2022-04-17")}
+        label="Date of birth"
+        value={values.date_of_birth}
+        // onChange={(newValue) => {
+        //   setUseState(newValue);
+        //   console.log(useStates);
+        // }}
+        onChange={handleChange}
+      />
 
       {/* Place of birth */}
 
