@@ -1,4 +1,4 @@
-const getFileExtension = (file: string) => {
+const getFileExtension = (file: any) => {
   // Get the last index of the dot (.) character
   const dotIndex = file.lastIndexOf(".");
 

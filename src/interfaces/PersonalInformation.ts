@@ -1,3 +1,4 @@
+import dayjs, { Dayjs } from "dayjs";
 import { FormikErrors, FormikTouched } from "formik";
 
 export interface PersonalInformationValues {
@@ -6,6 +7,7 @@ export interface PersonalInformationValues {
   maternal_last_name?: string;
   gender: string;
   preferred_gender: string;
+  date_of_birth: Dayjs | null;
   city_birth: string;
   state_birth: string;
   country: string;

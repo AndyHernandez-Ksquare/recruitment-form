@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TextField,
   Select,
@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { PersonalInformationProps } from "../../interfaces/PersonalInformation";
+import dayjs, { Dayjs } from "dayjs";
 
 export const PersonalInformation = ({
   errors,
@@ -17,6 +18,8 @@ export const PersonalInformation = ({
   handleChange,
   handleBlur,
 }: PersonalInformationProps) => {
+  const [useStates, setUseState] = useState<Dayjs | null>();
+
   return (
     <form style={{ marginTop: "1rem" }}>
       {/* Name */}
@@ -84,6 +87,16 @@ export const PersonalInformation = ({
         />
       )}
       {/* Date of birth */}
+      <DatePicker
+        // defaultValue={dayjs("2022-04-17")}
+        label="Date of birth"
+        value={values.date_of_birth}
+        // onChange={(newValue) => {
+        //   setUseState(newValue);
+        //   console.log(useStates);
+        // }}
+        onChange={handleChange}
+      />
 
       {/* Place of birth */}
 

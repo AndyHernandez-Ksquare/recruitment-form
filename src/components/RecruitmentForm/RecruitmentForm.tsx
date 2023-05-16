@@ -5,14 +5,16 @@ import { AddressInformation } from "../AddressInformation";
 import { AddressExtraInfo } from "../AddressExtraInfo";
 import { useFormik } from "formik";
 import { PersonalInformationValues } from "../../interfaces/PersonalInformation";
-import usePersonalInformationValidation from "../../validationHooks/usePersonalInformationValidation";
-import useAddressInformationValidation from "../../validationHooks/useAddressInformationValidation";
+import usePersonalInformationValidation from "../../validationHooks/usePersonalInformationValues";
+import useAddressInformationValidation from "../../validationHooks/useAddressInformationValues";
 import { AddressInformationValues } from "../../interfaces/AddressInformation";
 import { AddressExtraInfoValues } from "../../interfaces/AddressExtraInfo";
 import useAddressExtraInfoValidation from "../../validationHooks/useAddressExtraInfoValidation";
 import useExtraPersonalInfoValidation from "../../validationHooks/useExtraPersonalInfoValidation";
 import { ExtraPersonalInfoValues } from "../../interfaces/ExtraPersonalInfo";
 import { ExtraPersonalInfo } from "../ExtraPersonalInfo";
+import * as Yup from "yup";
+
 // This type is important so that I can pass the same props to all components
 type FormValues = PersonalInformationValues &
   AddressInformationValues &
@@ -20,43 +22,64 @@ type FormValues = PersonalInformationValues &
   ExtraPersonalInfoValues;
 
 export const RecruitmentForm = () => {
-  const { valuesPersonalInformation, validationPersonalInformation } =
-    usePersonalInformationValidation();
+  const { valuesPersonalInformation } = usePersonalInformationValidation();
 
-  const { valuesAddresslInformation, validationAddressInformation } =
-    useAddressInformationValidation();
+  const { valuesAddresslInformation } = useAddressInformationValidation();
 
-  const { valuesAddressExtraInfo, validationAddressExtraInfo } =
-    useAddressExtraInfoValidation();
+  const { valuesAddressExtraInfo } = useAddressExtraInfoValidation();
 
-  const { valuesExtraPersonalInfo, validationExtraPersonalInfo } =
-    useExtraPersonalInfoValidation();
+  const validationSchema = Yup.object({
+    // Personal Info
+    name: Yup.string().required("Name is required"),
+    paternal_last_name: Yup.string().required("Paternal last name is required"),
+    gender: Yup.string().required("Gender is required"),
+    city_birth: Yup.string().required("City of birth is required"),
+    state_birth: Yup.string().required("State of birth is required"),
+    country: Yup.string().required("Country is required"),
 
-  const combinedValidation = (values: FormValues) => {
-    const errorsFromPersonalInformationValidation =
-      validationPersonalInformation(values);
-    const errorsFromAddressInformationValidation =
-      validationAddressInformation(values);
-    const errorsFromAddressExtraInfoValidation =
-      validationAddressExtraInfo(values);
-    const errorsFromExtraPersonalInfo = validationExtraPersonalInfo(values);
+    // Address Info
+    street: Yup.string().required("Street is required"),
+    streetA: Yup.string().required("StreetA is required"),
+    colony: Yup.string().required("Colony is required"),
 
-    return {
-      ...errorsFromPersonalInformationValidation,
-      ...errorsFromAddressInformationValidation,
-      ...errorsFromAddressExtraInfoValidation,
-      ...errorsFromExtraPersonalInfo,
-    };
-  };
+    // Address extra info
 
-  const formik = useFormik<FormValues>({
+    identification: Yup.string().required("Identification is required"),
+  });
+
+  // const { valuesExtraPersonalInfo, validationExtraPersonalInfo } =
+  //   useExtraPersonalInfoValidation();
+
+  // const combinedValidation = (values: FormValues) => {
+  //   const errorsFromPersonalInformationValidation =
+  //     validationPersonalInformation(values);
+  //   const errorsFromAddressInformationValidation =
+  //     validationAddressInformation(values);
+  //   const errorsFromAddressExtraInfoValidation =
+  //     validationAddressExtraInfo(values);
+  //   const errorsFromExtraPersonalInfo = validationExtraPersonalInfo(values);
+
+  //   return {
+  //     ...errorsFromPersonalInformationValidation,
+  //     ...errorsFromAddressInformationValidation,
+  //     ...errorsFromAddressExtraInfoValidation,
+  //     ...errorsFromExtraPersonalInfo,
+  //   };
+  // };
+
+  const formik = useFormik<
+    PersonalInformationValues &
+      AddressInformationValues &
+      AddressExtraInfoValues
+  >({
     initialValues: {
       ...valuesPersonalInformation,
       ...valuesAddresslInformation,
       ...valuesAddressExtraInfo,
-      ...valuesExtraPersonalInfo,
+      // ...valuesExtraPersonalInfo,
     },
-    validate: combinedValidation,
+    // validate: combinedValidation,
+    validationSchema: validationSchema,
     onSubmit: (value) => {
       alert(JSON.stringify(value));
     },
@@ -90,13 +113,13 @@ export const RecruitmentForm = () => {
           handleChange={handleChange}
           handleBlur={handleBlur}
         />
-        <ExtraPersonalInfo
+        {/* <ExtraPersonalInfo
           errors={errors}
           touched={touched}
           values={values}
           handleChange={handleChange}
           handleBlur={handleBlur}
-        />
+        /> */}
         <button type="submit">Submit</button>
       </form>
     </Box>
