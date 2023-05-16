@@ -14,11 +14,14 @@ import useExtraPersonalInfoValues from "../../validationHooks/useExtraPersonalIn
 import { ExtraPersonalInfoValues } from "../../interfaces/ExtraPersonalInfo";
 import { ExtraPersonalInfo } from "../ExtraPersonalInfo";
 import * as Yup from "yup";
+import { GobernamentalInfoValues } from "../../interfaces/GobernamentalInfo";
+import { GobernamentalInfo } from "../GobernamentalInfo";
 
 // This type is important so that I can pass the same props to all components
 type FormValues = PersonalInformationValues &
   AddressInformationValues &
   AddressExtraInfoValues &
+  GobernamentalInfoValues &
   ExtraPersonalInfoValues;
 
 export const RecruitmentForm = () => {
@@ -95,6 +98,13 @@ export const RecruitmentForm = () => {
           handleBlur={handleBlur}
         />
         <AddressExtraInfo
+          errors={errors}
+          touched={touched}
+          values={values}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+        />
+        <GobernamentalInfo
           errors={errors}
           touched={touched}
           values={values}
