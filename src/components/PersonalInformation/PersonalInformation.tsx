@@ -6,6 +6,7 @@ import {
   InputLabel,
   FormControl,
   Typography,
+  Box,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { PersonalInformationProps } from "../../interfaces/PersonalInformation";
@@ -19,7 +20,14 @@ export const PersonalInformation = ({
   handleBlur,
 }: PersonalInformationProps) => {
   return (
-    <form style={{ marginTop: "1rem" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 1.5,
+        width: "50vw",
+      }}
+    >
       {/* Name */}
       <TextField
         required
@@ -100,7 +108,7 @@ export const PersonalInformation = ({
 
       {/* Place of birth */}
 
-      <FormControl fullWidth>
+      <FormControl sx={{ gap: 1.5 }} fullWidth>
         <Typography variant="h5">Place of birth</Typography>
         <TextField
           required
@@ -136,6 +144,6 @@ export const PersonalInformation = ({
           helperText={touched.country && errors.country}
         />
       </FormControl>
-    </form>
+    </Box>
   );
 };

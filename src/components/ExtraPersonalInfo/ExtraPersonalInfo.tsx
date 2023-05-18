@@ -20,7 +20,15 @@ export const ExtraPersonalInfo = ({
   handleBlur,
 }: ExtraPersonalInfoProps) => {
   return (
-    <form>
+    <Box
+      sx={{
+        width: 800,
+        // marginTop: -15,
+        display: "flex",
+        flexDirection: "column",
+        gap: 1,
+      }}
+    >
       <TextField
         label="Phone number"
         placeholder="ex: 32 7353853746"
@@ -89,7 +97,7 @@ export const ExtraPersonalInfo = ({
         </InputLabel>
         <TextareaAutosize
           name="mostLikeSD"
-          id="mostLikeSD_label"
+          id="mostLikeSD"
           value={values.mostLikeSD}
           onChange={handleChange}
           maxLength={100}
@@ -144,42 +152,46 @@ export const ExtraPersonalInfo = ({
       values.highestDegree === "Masters_degree" ||
       values.highestDegree === "Incomplete_PHD_or_in_progress" ||
       values.highestDegree === "PHD" ? (
-        <FormControl>
-          <TextField
-            id="universityName"
-            name="universityName"
-            label="Name of University"
-            value={values.universityName}
-            onChange={handleChange}
-          ></TextField>
-          <TextField
-            id="universityCity"
-            name="universityCity"
-            label="City of University"
-            value={values.universityCity}
-            onChange={handleChange}
-          ></TextField>
-          <TextField
-            id="universityState"
-            name="universityState"
-            label="State of University"
-            value={values.universityState}
-            onChange={handleChange}
-          ></TextField>
-          <TextField
-            id="universityCountry"
-            name="universityCountry"
-            label="Country of University"
-            value={values.universityCountry}
-            onChange={handleChange}
-          ></TextField>
-          <TextField
-            id="nameOfDegree"
-            name="nameOfDegree"
-            label="Name of Your Degree"
-            value={values.nameOfDegree}
-            onChange={handleChange}
-          ></TextField>
+        <FormControl sx={{ display: "flex", gap: 1 }}>
+          <Box sx={{ display: "flex", gap: 1 }}>
+            <TextField
+              id="universityName"
+              name="universityName"
+              label="Name of University"
+              value={values.universityName}
+              onChange={handleChange}
+            ></TextField>
+            <TextField
+              id="universityCity"
+              name="universityCity"
+              label="City of University"
+              value={values.universityCity}
+              onChange={handleChange}
+            ></TextField>
+            <TextField
+              id="universityState"
+              name="universityState"
+              label="State of University"
+              value={values.universityState}
+              onChange={handleChange}
+            ></TextField>
+          </Box>
+          <Box sx={{ display: "flex", gap: 1 }}>
+            <TextField
+              id="universityCountry"
+              name="universityCountry"
+              label="Country of University"
+              value={values.universityCountry}
+              onChange={handleChange}
+            ></TextField>
+            <TextField
+              id="nameOfDegree"
+              name="nameOfDegree"
+              label="Name of Your Degree"
+              value={values.nameOfDegree}
+              onChange={handleChange}
+            ></TextField>
+          </Box>
           <FormControl sx={{ width: 250 }}>
             <InputLabel id="finishedDegree_label">
               Did you finish your degree?
@@ -272,10 +284,10 @@ export const ExtraPersonalInfo = ({
             </Select>
 
             {values.scholarship === "yes" && (
-              <Box>
+              <Box sx={{ display: "flex", gap: 1, marginTop: 2 }}>
                 <FormControl fullWidth>
                   <InputLabel id="scholarshipLevel_label">
-                    Did you have an scholarship?
+                    Scholarship level
                   </InputLabel>
                   <Select
                     labelId="scholarshipLevel_label"
@@ -326,6 +338,6 @@ export const ExtraPersonalInfo = ({
           </FormControl>
         </FormControl>
       ) : null}
-    </form>
+    </Box>
   );
 };

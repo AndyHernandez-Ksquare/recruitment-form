@@ -12,4 +12,9 @@ export type FormValues = PersonalInformationValues &
   GobernamentalInfoValues &
   ExtraPersonalInfoValues &
   BankAccountInfoValues &
-  SkillsValues;
+  SkillsValues &
+  AgreeWithTerms;
+
+interface AgreeWithTerms {
+  agreeWithTerms: boolean;
+}

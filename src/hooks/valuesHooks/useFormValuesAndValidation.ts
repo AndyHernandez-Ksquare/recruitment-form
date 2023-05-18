@@ -26,6 +26,7 @@ const useFormValuesAndValidation = () => {
     ...valuesExtraPersonalInfo,
     ...valuesBankAccountInfo,
     ...valuesSkills,
+    agreeWithTerms: false,
   };
 
   const validationSchema = Yup.object({
@@ -64,6 +65,8 @@ const useFormValuesAndValidation = () => {
     ),
 
     CLABE: Yup.string().matches(/^\d{18}$/, "This is not a valid CLABE"),
+
+    agreeWithTerms: Yup.boolean().oneOf([true]),
   });
 
   return { valuesForm, validationSchema };

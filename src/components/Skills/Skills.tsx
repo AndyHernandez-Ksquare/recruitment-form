@@ -1,6 +1,7 @@
 import React from "react";
 import { SkillsProps } from "../../interfaces/Skills";
 import {
+  Box,
   FormControl,
   InputLabel,
   MenuItem,
@@ -16,7 +17,9 @@ export const Skills = ({
   handleBlur,
 }: SkillsProps) => {
   return (
-    <form>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", gap: 1, marginTop: -30 }}
+    >
       <TextField
         sx={{ width: 400 }}
         id="knowProgrammingLanguage"
@@ -61,6 +64,6 @@ export const Skills = ({
           <MenuItem value="Visual_impairment">Visual Impairment</MenuItem>
         </Select>
       </FormControl>
-    </form>
+    </Box>
   );
 };

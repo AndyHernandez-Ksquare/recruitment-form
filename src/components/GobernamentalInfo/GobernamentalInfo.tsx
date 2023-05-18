@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, FormControl, Button } from "@mui/material";
+import { TextField, FormControl, Button, Box } from "@mui/material";
 import { GobernamentalInfoProps } from "../../interfaces/GobernamentalInfo";
 export const GobernamentalInfo = ({
   errors,
@@ -9,7 +9,9 @@ export const GobernamentalInfo = ({
   handleBlur,
 }: GobernamentalInfoProps) => {
   return (
-    <form>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: -30 }}
+    >
       {values.country.toLowerCase() === "mexico" ? (
         <TextField
           id="identificationCurp"
@@ -41,7 +43,7 @@ export const GobernamentalInfo = ({
         />
       )}
 
-      <FormControl>
+      <FormControl sx={{}}>
         <input
           type="file"
           accept="application/pdf,image/jpeg,image/jpg,image/png"
@@ -66,6 +68,6 @@ export const GobernamentalInfo = ({
           </Button>
         </label>
       </FormControl>
-    </form>
+    </Box>
   );
 };
