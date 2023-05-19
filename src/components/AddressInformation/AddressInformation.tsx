@@ -12,8 +12,10 @@ export const AddressInformation = ({
   errors,
   touched,
   values,
+  activeStep,
   handleChange,
   handleBlur,
+  setFieldValue,
 }: AddressInformationProps) => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -32,7 +34,7 @@ export const AddressInformation = ({
         }}
       >
         {/* Streets */}
-        <FormControl>
+        <FormControl sx={{ displlay: "flex", gap: 1 }}>
           <TextField
             required
             id="street"
@@ -64,7 +66,7 @@ export const AddressInformation = ({
             onChange={handleChange}
           />
         </FormControl>
-        <FormControl>
+        <FormControl sx={{ displlay: "flex", gap: 1 }}>
           <TextField
             required
             id="colony"

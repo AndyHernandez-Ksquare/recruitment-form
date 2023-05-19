@@ -63,7 +63,7 @@ export const ExtraPersonalInfo = ({
         error={touched.altEmail && Boolean(errors.altEmail)}
         helperText={touched.altEmail && errors.altEmail}
       />
-      <FormControl fullWidth>
+      <FormControl fullWidth sx={{ display: "flex", gap: 1 }}>
         <InputLabel id="howDiscoveredUs_label">
           How did you find about us?
         </InputLabel>
@@ -192,7 +192,7 @@ export const ExtraPersonalInfo = ({
               onChange={handleChange}
             ></TextField>
           </Box>
-          <FormControl sx={{ width: 250 }}>
+          <FormControl sx={{ width: 250, marginTop: 1 }}>
             <InputLabel id="finishedDegree_label">
               Did you finish your degree?
             </InputLabel>

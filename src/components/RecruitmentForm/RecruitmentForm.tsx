@@ -19,6 +19,7 @@ import { BankAccountInfo } from "../BankAccountInfo";
 import { Skills } from "../Skills";
 import { FormValues } from "../../interfaces/Form";
 import useFormValuesAndValidation from "../../hooks/valuesHooks/useFormValuesAndValidation";
+import ModalForm from "./ModalForm";
 
 export const RecruitmentForm = () => {
   const { valuesForm, validationSchema } = useFormValuesAndValidation();
@@ -27,16 +28,22 @@ export const RecruitmentForm = () => {
 
   const formik = useFormik<FormValues>({
     initialValues: valuesForm,
-    // validate: combinedValidation,
     validationSchema: validationSchema,
     onSubmit: (value) => {
       setFormSubmitted(value);
     },
   });
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
-    formik;
-  console.log(formSubmitted);
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    setFieldValue,
+  } = formik;
+  // console.log(formSubmitted);
 
   const steps = [
     "Personal Information",
@@ -62,6 +69,7 @@ export const RecruitmentForm = () => {
             values={values}
             handleChange={handleChange}
             handleBlur={handleBlur}
+            setFieldValue={setFieldValue}
           />
         );
       case 1:
@@ -70,8 +78,10 @@ export const RecruitmentForm = () => {
             errors={errors}
             touched={touched}
             values={values}
+            activeStep={activeStep}
             handleChange={handleChange}
             handleBlur={handleBlur}
+            setFieldValue={setFieldValue}
           />
         );
       case 2:
@@ -196,6 +206,7 @@ export const RecruitmentForm = () => {
         <Button sx={{ marginTop: 5 }} disabled={isSubmitDisabled} type="submit">
           Submit
         </Button>
+        <ModalForm formValues={formSubmitted} />
       </form>
     </Box>
   );

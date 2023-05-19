@@ -17,9 +17,17 @@ export const AddressExtraInfo = ({
   handleBlur,
 }: AddressExtraInfoProps) => {
   return (
-    <Box sx={{ width: 300, marginTop: -30 }}>
+    <Box
+      sx={{
+        width: 300,
+        marginTop: -20,
+        display: "flex",
+        gap: 1,
+        flexDirection: "column",
+      }}
+    >
       {/* Type of residency */}
-      <FormControl fullWidth>
+      <FormControl fullWidth sx={{ display: "flex", gap: 1 }}>
         <InputLabel id="residency_label">Residency type</InputLabel>
         <Select
           required

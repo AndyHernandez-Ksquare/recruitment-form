@@ -1,4 +1,5 @@
 import { FormikErrors, FormikTouched } from "formik";
+import { FormValues } from "./Form";
 
 export type AddressInformationValues = {
   street: string;
@@ -23,4 +24,10 @@ export interface AddressInformationProps {
     (e: React.FocusEvent<any, Element>): void;
     <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
   };
+  activeStep: number;
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined
+  ) => Promise<void> | Promise<FormikErrors<FormValues>>;
 }

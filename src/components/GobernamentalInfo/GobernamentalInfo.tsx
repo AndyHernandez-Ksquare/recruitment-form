@@ -10,7 +10,7 @@ export const GobernamentalInfo = ({
 }: GobernamentalInfoProps) => {
   return (
     <Box
-      sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: -30 }}
+      sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: -20 }}
     >
       {values.country.toLowerCase() === "mexico" ? (
         <TextField
@@ -43,7 +43,7 @@ export const GobernamentalInfo = ({
         />
       )}
 
-      <FormControl sx={{}}>
+      <FormControl>
         <input
           type="file"
           accept="application/pdf,image/jpeg,image/jpg,image/png"
