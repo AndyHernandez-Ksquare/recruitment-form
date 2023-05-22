@@ -23,4 +23,14 @@ export interface AddressInformationProps {
     (e: React.FocusEvent<any, Element>): void;
     <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
   };
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined
+  ) => Promise<void> | Promise<FormikErrors<AddressInformationValues>>;
+  setFieldTouched: (
+    field: string,
+    touched?: boolean | undefined,
+    shouldValidate?: boolean | undefined
+  ) => Promise<void> | Promise<FormikErrors<AddressInformationValues>>;
 }

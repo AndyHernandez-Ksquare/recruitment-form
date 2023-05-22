@@ -1,4 +1,4 @@
-import { ExtraPersonalInfoValues } from "../interfaces/ExtraPersonalInfo";
+import { ExtraPersonalInfoValues } from "../../interfaces/ExtraPersonalInfo";
 
 const useExtraPersonalInfoValues = () => {
   let valuesExtraPersonalInfo: ExtraPersonalInfoValues = {
@@ -22,7 +22,7 @@ const useExtraPersonalInfoValues = () => {
     scholarship: "",
     scholarshipLevel: "",
     scholarshipKind: "",
-    scholarshipDuration: 0,
+    scholarshipDuration: null,
   };
 
   return { valuesExtraPersonalInfo };

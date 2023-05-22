@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { ExtraPersonalInfoProps } from "../../interfaces/ExtraPersonalInfo";
 import {
   Box,
@@ -18,9 +18,19 @@ export const ExtraPersonalInfo = ({
   values,
   handleChange,
   handleBlur,
+  setFieldValue,
+  setFieldTouched,
 }: ExtraPersonalInfoProps) => {
   return (
-    <form>
+    <Box
+      sx={{
+        width: 800,
+        // marginTop: -15,
+        display: "flex",
+        flexDirection: "column",
+        gap: 1,
+      }}
+    >
       <TextField
         label="Phone number"
         placeholder="ex: 32 7353853746"
@@ -55,7 +65,7 @@ export const ExtraPersonalInfo = ({
         error={touched.altEmail && Boolean(errors.altEmail)}
         helperText={touched.altEmail && errors.altEmail}
       />
-      <FormControl fullWidth>
+      <FormControl fullWidth sx={{ display: "flex", gap: 1 }}>
         <InputLabel id="howDiscoveredUs_label">
           How did you find about us?
         </InputLabel>
@@ -89,7 +99,7 @@ export const ExtraPersonalInfo = ({
         </InputLabel>
         <TextareaAutosize
           name="mostLikeSD"
-          id="mostLikeSD_label"
+          id="mostLikeSD"
           value={values.mostLikeSD}
           onChange={handleChange}
           maxLength={100}
@@ -144,43 +154,47 @@ export const ExtraPersonalInfo = ({
       values.highestDegree === "Masters_degree" ||
       values.highestDegree === "Incomplete_PHD_or_in_progress" ||
       values.highestDegree === "PHD" ? (
-        <FormControl>
-          <TextField
-            id="universityName"
-            name="universityName"
-            label="Name of University"
-            value={values.universityName}
-            onChange={handleChange}
-          ></TextField>
-          <TextField
-            id="universityCity"
-            name="universityCity"
-            label="City of University"
-            value={values.universityCity}
-            onChange={handleChange}
-          ></TextField>
-          <TextField
-            id="universityState"
-            name="universityState"
-            label="State of University"
-            value={values.universityState}
-            onChange={handleChange}
-          ></TextField>
-          <TextField
-            id="universityCountry"
-            name="universityCountry"
-            label="Country of University"
-            value={values.universityCountry}
-            onChange={handleChange}
-          ></TextField>
-          <TextField
-            id="nameOfDegree"
-            name="nameOfDegree"
-            label="Name of Your Degree"
-            value={values.nameOfDegree}
-            onChange={handleChange}
-          ></TextField>
-          <FormControl sx={{ width: 250 }}>
+        <FormControl sx={{ display: "flex", gap: 1 }}>
+          <Box sx={{ display: "flex", gap: 1 }}>
+            <TextField
+              id="universityName"
+              name="universityName"
+              label="Name of University"
+              value={values.universityName}
+              onChange={handleChange}
+            ></TextField>
+            <TextField
+              id="universityCity"
+              name="universityCity"
+              label="City of University"
+              value={values.universityCity}
+              onChange={handleChange}
+            ></TextField>
+            <TextField
+              id="universityState"
+              name="universityState"
+              label="State of University"
+              value={values.universityState}
+              onChange={handleChange}
+            ></TextField>
+          </Box>
+          <Box sx={{ display: "flex", gap: 1 }}>
+            <TextField
+              id="universityCountry"
+              name="universityCountry"
+              label="Country of University"
+              value={values.universityCountry}
+              onChange={handleChange}
+            ></TextField>
+            <TextField
+              id="nameOfDegree"
+              name="nameOfDegree"
+              label="Name of Your Degree"
+              value={values.nameOfDegree}
+              onChange={handleChange}
+            ></TextField>
+          </Box>
+          <FormControl sx={{ width: 250, marginTop: 1 }}>
             <InputLabel id="finishedDegree_label">
               Did you finish your degree?
             </InputLabel>
@@ -198,21 +212,40 @@ export const ExtraPersonalInfo = ({
             {values.finishedDegree === "yes" && (
               <Box>
                 <FormControl>
-                  <input
+                  <Input
                     type="file"
-                    accept="application/pdf,image/jpeg,image/jpg,image/png"
                     id="proofOfDegree"
                     name="proofOfDegree"
                     style={{ display: "none" }}
-                    value={values.proofOfDegree}
-                    onChange={handleChange}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                      setFieldTouched("proofOfDegree", true);
+                      setFieldValue(
+                        "proofOfDegree",
+                        event.currentTarget.files![0].name
+                      );
+                    }}
+                    error={
+                      touched.proofOfDegree && Boolean(errors.proofOfDegree)
+                    }
                   />
                 </FormControl>
                 <InputLabel htmlFor="proofOfDegree">
-                  <Button variant="contained" component="span">
-                    {values.proofOfDegree
+                  <Button
+                    sx={{
+                      minWidth: 200,
+                      backgroundColor:
+                        touched.proofOfDegree && errors.proofOfDegree
+                          ? "red"
+                          : "none",
+                    }}
+                    variant="contained"
+                    component="span"
+                  >
+                    {touched.proofOfDegree && errors.proofOfDegree
+                      ? errors.proofOfDegree
+                      : values.proofOfDegree
                       ? "File uploaded!"
-                      : "Upload Proof of Address"}
+                      : "Upload Proof of Degree"}
                   </Button>
                 </InputLabel>
               </Box>
@@ -235,21 +268,40 @@ export const ExtraPersonalInfo = ({
             {values.proffesionalLicense === "yes" && (
               <Box>
                 <FormControl>
-                  <input
+                  <Input
                     type="file"
-                    accept="application/pdf,image/jpeg,image/jpg,image/png"
                     id="proofOfLicense"
                     name="proofOfLicense"
                     style={{ display: "none" }}
-                    value={values.proofOfLicense}
-                    onChange={handleChange}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                      setFieldTouched("proofOfLicense", true);
+                      setFieldValue(
+                        "proofOfLicense",
+                        event.currentTarget.files![0].name
+                      );
+                    }}
+                    error={
+                      touched.proofOfLicense && Boolean(errors.proofOfLicense)
+                    }
                   />
                 </FormControl>
                 <InputLabel htmlFor="proofOfLicense">
-                  <Button variant="contained" component="span">
-                    {values.proofOfLicense
+                  <Button
+                    sx={{
+                      minWidth: 200,
+                      backgroundColor:
+                        touched.proofOfLicense && errors.proofOfLicense
+                          ? "red"
+                          : "none",
+                    }}
+                    variant="contained"
+                    component="span"
+                  >
+                    {touched.proofOfLicense && errors.proofOfLicense
+                      ? errors.proofOfLicense
+                      : values.proofOfLicense
                       ? "File uploaded!"
-                      : "Upload Proof of Address"}
+                      : "Upload Proof of Degree"}
                   </Button>
                 </InputLabel>
               </Box>
@@ -272,10 +324,10 @@ export const ExtraPersonalInfo = ({
             </Select>
 
             {values.scholarship === "yes" && (
-              <Box>
+              <Box sx={{ display: "flex", gap: 1, marginTop: 2 }}>
                 <FormControl fullWidth>
                   <InputLabel id="scholarshipLevel_label">
-                    Did you have an scholarship?
+                    Scholarship level
                   </InputLabel>
                   <Select
                     labelId="scholarshipLevel_label"
@@ -326,6 +378,6 @@ export const ExtraPersonalInfo = ({
           </FormControl>
         </FormControl>
       ) : null}
-    </form>
+    </Box>
   );
 };

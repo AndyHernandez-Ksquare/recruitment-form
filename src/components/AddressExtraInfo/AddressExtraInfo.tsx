@@ -5,9 +5,10 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  Box,
+=======
   Typography,
-} from "@mui/material";
-import { AddressExtraInfoProps } from "../../interfaces/AddressExtraInfo";
+
 
 export const AddressExtraInfo = ({
   errors,
@@ -17,11 +18,17 @@ export const AddressExtraInfo = ({
   handleBlur,
 }: AddressExtraInfoProps) => {
   return (
-    <form>
-      <Typography variant="body1">Extra information</Typography>
-
+    <Box
+      sx={{
+        width: 300,
+        marginTop: -20,
+        display: "flex",
+        gap: 1,
+        flexDirection: "column",
+      }}
+    >
       {/* Type of residency */}
-      <FormControl fullWidth>
+      <FormControl fullWidth sx={{ display: "flex", gap: 1 }}>
         <InputLabel id="residency_label">Residency type</InputLabel>
         <Select
           required
@@ -80,6 +87,7 @@ export const AddressExtraInfo = ({
           </MenuItem>
         </Select>
       </FormControl>
-    </form>
+    </Box>
+
   );
 };

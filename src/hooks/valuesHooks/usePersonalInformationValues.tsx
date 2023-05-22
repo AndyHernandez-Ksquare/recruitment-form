@@ -1,4 +1,4 @@
-import { PersonalInformationValues } from "../interfaces/PersonalInformation";
+import { PersonalInformationValues } from "../../interfaces/PersonalInformation";
 import dayjs from "dayjs";
 
 const usePersonalInformationValues = () => {

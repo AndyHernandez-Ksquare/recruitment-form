@@ -1,5 +1,6 @@
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import { FormikErrors, FormikTouched } from "formik";
+import { FormValues } from "./Form";
 
 export interface PersonalInformationValues {
   name: string;
@@ -25,4 +26,9 @@ export interface PersonalInformationProps {
     (e: React.FocusEvent<any, Element>): void;
     <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
   };
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined
+  ) => Promise<void> | Promise<FormikErrors<FormValues>>;
 }

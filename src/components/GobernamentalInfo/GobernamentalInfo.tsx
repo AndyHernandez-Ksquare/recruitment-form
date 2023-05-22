@@ -1,5 +1,13 @@
-import React from "react";
-import { TextField, FormControl, Button } from "@mui/material";
+import React, { ChangeEvent } from "react";
+import {
+  TextField,
+  FormControl,
+  Button,
+  Box,
+  Input,
+  InputLabel,
+} from "@mui/material";
+
 import { GobernamentalInfoProps } from "../../interfaces/GobernamentalInfo";
 export const GobernamentalInfo = ({
   errors,
@@ -7,9 +15,21 @@ export const GobernamentalInfo = ({
   values,
   handleChange,
   handleBlur,
+  setFieldValue,
+  setFieldTouched,
 }: GobernamentalInfoProps) => {
+  console.log(values.identificationProof);
   return (
-    <form>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 2,
+        marginTop: -20,
+      }}
+    >
+
       {values.country.toLowerCase() === "mexico" ? (
         <TextField
           id="identificationCurp"
@@ -40,32 +60,43 @@ export const GobernamentalInfo = ({
           }
         />
       )}
-
       <FormControl>
-        <input
+        <Input
           type="file"
-          accept="application/pdf,image/jpeg,image/jpg,image/png"
-          id="identificationProof"
           name="identificationProof"
+          id="identificationProof"
           style={{ display: "none" }}
-          value={values.identificationProof}
-          onChange={handleChange}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            setFieldTouched("identificationProof", true);
+            setFieldValue(
+              "identificationProof",
+              event.currentTarget.files![0].name
+            );
+          }}
+          error={
+            touched.identificationProof && Boolean(errors.identificationProof)
+          }
         />
-
-        <label htmlFor="identificationProof">
-          <Button
-            sx={{ backgroundColor: errors.identificationProof && "red" }}
-            variant="contained"
-            component="span"
-          >
-            {errors.identificationProof
-              ? "Must be pdf, jpg, or png"
-              : values.identificationProof
-              ? "File uploaded!"
-              : "Upload Proof of Identification"}
-          </Button>
-        </label>
       </FormControl>
-    </form>
+      <InputLabel htmlFor="identificationProof">
+        <Button
+          sx={{
+            backgroundColor:
+              touched.identificationProof && errors.identificationProof
+                ? "red"
+                : "none",
+          }}
+          variant="contained"
+          component="span"
+        >
+          {touched.identificationProof && errors.identificationProof
+            ? errors.identificationProof
+            : values.identificationProof
+            ? "File uploaded!"
+            : "Upload Proof of Identification"}
+        </Button>
+      </InputLabel>
+    </Box>
+
   );
 };

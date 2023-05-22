@@ -1,4 +1,4 @@
-import { AddressExtraInfoValues } from "../interfaces/AddressExtraInfo";
+import { AddressExtraInfoValues } from "../../interfaces/AddressExtraInfo";
 
 const useAddressExtraInfoValues = () => {
   let valuesAddressExtraInfo: AddressExtraInfoValues = {
