@@ -21,7 +21,7 @@ export interface ExtraPersonalInfoValues {
   scholarship?: string;
   scholarshipLevel?: string;
   scholarshipKind?: string;
-  scholarshipDuration?: number;
+  scholarshipDuration?: number | null;
 }
 
 export interface ExtraPersonalInfoProps {
@@ -36,4 +36,14 @@ export interface ExtraPersonalInfoProps {
     (e: React.FocusEvent<any, Element>): void;
     <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
   };
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined
+  ) => Promise<void> | Promise<FormikErrors<ExtraPersonalInfoValues>>;
+  setFieldTouched: (
+    field: string,
+    touched?: boolean | undefined,
+    shouldValidate?: boolean | undefined
+  ) => Promise<void> | Promise<FormikErrors<ExtraPersonalInfoValues>>;
 }

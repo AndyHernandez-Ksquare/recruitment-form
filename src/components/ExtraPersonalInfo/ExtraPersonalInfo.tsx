@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { ExtraPersonalInfoProps } from "../../interfaces/ExtraPersonalInfo";
 import {
   Box,
@@ -18,6 +18,8 @@ export const ExtraPersonalInfo = ({
   values,
   handleChange,
   handleBlur,
+  setFieldValue,
+  setFieldTouched,
 }: ExtraPersonalInfoProps) => {
   return (
     <Box
@@ -210,21 +212,40 @@ export const ExtraPersonalInfo = ({
             {values.finishedDegree === "yes" && (
               <Box>
                 <FormControl>
-                  <input
+                  <Input
                     type="file"
-                    accept="application/pdf,image/jpeg,image/jpg,image/png"
                     id="proofOfDegree"
                     name="proofOfDegree"
                     style={{ display: "none" }}
-                    value={values.proofOfDegree}
-                    onChange={handleChange}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                      setFieldTouched("proofOfDegree", true);
+                      setFieldValue(
+                        "proofOfDegree",
+                        event.currentTarget.files![0].name
+                      );
+                    }}
+                    error={
+                      touched.proofOfDegree && Boolean(errors.proofOfDegree)
+                    }
                   />
                 </FormControl>
                 <InputLabel htmlFor="proofOfDegree">
-                  <Button variant="contained" component="span">
-                    {values.proofOfDegree
+                  <Button
+                    sx={{
+                      minWidth: 200,
+                      backgroundColor:
+                        touched.proofOfDegree && errors.proofOfDegree
+                          ? "red"
+                          : "none",
+                    }}
+                    variant="contained"
+                    component="span"
+                  >
+                    {touched.proofOfDegree && errors.proofOfDegree
+                      ? errors.proofOfDegree
+                      : values.proofOfDegree
                       ? "File uploaded!"
-                      : "Upload Proof of Address"}
+                      : "Upload Proof of Degree"}
                   </Button>
                 </InputLabel>
               </Box>
@@ -247,21 +268,40 @@ export const ExtraPersonalInfo = ({
             {values.proffesionalLicense === "yes" && (
               <Box>
                 <FormControl>
-                  <input
+                  <Input
                     type="file"
-                    accept="application/pdf,image/jpeg,image/jpg,image/png"
                     id="proofOfLicense"
                     name="proofOfLicense"
                     style={{ display: "none" }}
-                    value={values.proofOfLicense}
-                    onChange={handleChange}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                      setFieldTouched("proofOfLicense", true);
+                      setFieldValue(
+                        "proofOfLicense",
+                        event.currentTarget.files![0].name
+                      );
+                    }}
+                    error={
+                      touched.proofOfLicense && Boolean(errors.proofOfLicense)
+                    }
                   />
                 </FormControl>
                 <InputLabel htmlFor="proofOfLicense">
-                  <Button variant="contained" component="span">
-                    {values.proofOfLicense
+                  <Button
+                    sx={{
+                      minWidth: 200,
+                      backgroundColor:
+                        touched.proofOfLicense && errors.proofOfLicense
+                          ? "red"
+                          : "none",
+                    }}
+                    variant="contained"
+                    component="span"
+                  >
+                    {touched.proofOfLicense && errors.proofOfLicense
+                      ? errors.proofOfLicense
+                      : values.proofOfLicense
                       ? "File uploaded!"
-                      : "Upload Proof of Address"}
+                      : "Upload Proof of Degree"}
                   </Button>
                 </InputLabel>
               </Box>

@@ -3,6 +3,7 @@ import useAddressExtraInfoValues from "./useAddressExtraInfoValues";
 import useAddressInformationValues from "./useAddressInformationValues";
 import useBankAccountInfoValues from "./useBankAccountInfoValues";
 import useExtraPersonalInfoValues from "./useExtraPersonalInfoValues";
+import useGobernamentalInfoValues from "./useGobernamentalInfoValues";
 import usePersonalInformationValues from "./usePersonalInformationValues";
 import useSkillsValues from "./useSkillsValues";
 import * as Yup from "yup";
@@ -14,15 +15,18 @@ const useFormValuesAndValidation = () => {
 
   const { valuesAddressExtraInfo } = useAddressExtraInfoValues();
 
+  const { valuesGobernamentalInfo } = useGobernamentalInfoValues();
+
   const { valuesExtraPersonalInfo } = useExtraPersonalInfoValues();
 
   const { valuesBankAccountInfo } = useBankAccountInfoValues();
 
   const { valuesSkills } = useSkillsValues();
-  let valuesForm: FormValues = {
+  const valuesForm: FormValues = {
     ...valuesPersonalInformation,
     ...valuesAddresslInformation,
     ...valuesAddressExtraInfo,
+    ...valuesGobernamentalInfo,
     ...valuesExtraPersonalInfo,
     ...valuesBankAccountInfo,
     ...valuesSkills,
@@ -42,8 +46,18 @@ const useFormValuesAndValidation = () => {
     street: Yup.string().required("Street is required"),
     streetA: Yup.string().required("StreetA is required"),
     colony: Yup.string().required("Colony is required"),
+    addressProof: Yup.string().test(
+      "fileFormat",
+      "Unsupported file format",
+      (value) => {
+        if (!value) return true; // Skip validation if no file is selected
 
-    // Address extra info
+        const supportedFormats = ["pdf", "png", "jpeg", "jpg"];
+        const fileExtension = value.split(".").pop()?.toLowerCase();
+        return supportedFormats.includes(fileExtension!);
+      }
+    ),
+    // Gobernamental info
     identificationCurp: Yup.string().matches(
       /^[A-Z0-9]{18}$/,
       "This is not a valid CURP document"
@@ -53,10 +67,43 @@ const useFormValuesAndValidation = () => {
       "This is not a valid passport document"
     ),
 
+    identificationProof: Yup.string().test(
+      "fileFormat",
+      "Unsupported file format",
+      (value) => {
+        if (!value) return true; // Skip validation if no file is selected
+
+        const supportedFormats = ["pdf", "png", "jpeg", "jpg"];
+        const fileExtension = value.split(".").pop()?.toLowerCase();
+        return supportedFormats.includes(fileExtension!);
+      }
+    ),
     // Extra personal info
     email: Yup.string().email("This is not an email"),
     altEmail: Yup.string().email("This is not an email"),
     phone: Yup.string().matches(/^\d{1,2} \d{10}$/, "Invalid phone number"),
+    proofOfDegree: Yup.string().test(
+      "fileFormat",
+      "Unsupported file format",
+      (value) => {
+        if (!value) return true; // Skip validation if no file is selected
+
+        const supportedFormats = ["pdf", "png", "jpeg", "jpg"];
+        const fileExtension = value.split(".").pop()?.toLowerCase();
+        return supportedFormats.includes(fileExtension!);
+      }
+    ),
+    proofOfLicense: Yup.string().test(
+      "fileFormat",
+      "Unsupported file format",
+      (value) => {
+        if (!value) return true; // Skip validation if no file is selected
+
+        const supportedFormats = ["pdf", "png", "jpeg", "jpg"];
+        const fileExtension = value.split(".").pop()?.toLowerCase();
+        return supportedFormats.includes(fileExtension!);
+      }
+    ),
 
     // Bank account info
     accountNumber: Yup.string().matches(

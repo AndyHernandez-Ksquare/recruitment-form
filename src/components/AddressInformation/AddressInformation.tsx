@@ -5,18 +5,20 @@ import {
   Button,
   InputLabel,
   Box,
+  Input,
 } from "@mui/material";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { AddressInformationProps } from "../../interfaces/AddressInformation";
 export const AddressInformation = ({
   errors,
   touched,
   values,
-  activeStep,
   handleChange,
   handleBlur,
   setFieldValue,
+  setFieldTouched,
 }: AddressInformationProps) => {
+  console.log(values.addressProof);
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography variant="h6">
@@ -99,21 +101,34 @@ export const AddressInformation = ({
             value={values.postalCode}
             onChange={handleChange}
           />
-          <input
+          <Input
             type="file"
-            accept="application/pdf,image/jpeg,image/jpg,image/png"
-            id="addressProof"
             name="addressProof"
+            id="addressProof"
             style={{ display: "none" }}
-            value={values.addressProof}
-            onChange={handleChange}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setFieldTouched("addressProof", true);
+              setFieldValue("addressProof", event.currentTarget.files![0].name);
+            }}
+            error={touched.addressProof && Boolean(errors.addressProof)}
           />
         </FormControl>
       </FormControl>
       <Box sx={{ display: "flex", justifyContent: "center", marginTop: 4 }}>
         <InputLabel htmlFor="addressProof">
-          <Button variant="contained" component="span">
-            {values.addressProof ? "File uploaded!" : "Upload Proof of Address"}
+          <Button
+            variant="contained"
+            component="span"
+            sx={{
+              backgroundColor:
+                touched.addressProof && errors.addressProof ? "red" : "none",
+            }}
+          >
+            {touched.addressProof && errors.addressProof
+              ? errors.addressProof
+              : values.addressProof
+              ? "File uploaded!"
+              : "Upload Proof of Address"}
           </Button>
         </InputLabel>
       </Box>

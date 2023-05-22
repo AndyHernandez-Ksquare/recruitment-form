@@ -22,7 +22,7 @@ const useExtraPersonalInfoValues = () => {
     scholarship: "",
     scholarshipLevel: "",
     scholarshipKind: "",
-    scholarshipDuration: 0,
+    scholarshipDuration: null,
   };
 
   return { valuesExtraPersonalInfo };

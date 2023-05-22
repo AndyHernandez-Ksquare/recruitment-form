@@ -1,13 +1,13 @@
 import { GobernamentalInfoValues } from "../../interfaces/GobernamentalInfo";
 
 const useGobernamentalInfoValues = () => {
-  let valuesAddressExtraInfo: GobernamentalInfoValues = {
+  let valuesGobernamentalInfo: GobernamentalInfoValues = {
     identificationCurp: "",
     identificationPassport: "",
     identificationProof: "",
   };
 
-  return { valuesAddressExtraInfo };
+  return { valuesGobernamentalInfo };
 };
 
 export default useGobernamentalInfoValues;

@@ -18,4 +18,14 @@ export interface GobernamentalInfoProps {
     (e: React.FocusEvent<any, Element>): void;
     <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
   };
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined
+  ) => Promise<void> | Promise<FormikErrors<GobernamentalInfoValues>>;
+  setFieldTouched: (
+    field: string,
+    touched?: boolean | undefined,
+    shouldValidate?: boolean | undefined
+  ) => Promise<void> | Promise<FormikErrors<GobernamentalInfoValues>>;
 }

@@ -42,6 +42,7 @@ export const RecruitmentForm = () => {
     handleBlur,
     handleSubmit,
     setFieldValue,
+    setFieldTouched,
   } = formik;
   // console.log(formSubmitted);
 
@@ -78,10 +79,10 @@ export const RecruitmentForm = () => {
             errors={errors}
             touched={touched}
             values={values}
-            activeStep={activeStep}
             handleChange={handleChange}
             handleBlur={handleBlur}
             setFieldValue={setFieldValue}
+            setFieldTouched={setFieldTouched}
           />
         );
       case 2:
@@ -102,6 +103,8 @@ export const RecruitmentForm = () => {
             values={values}
             handleChange={handleChange}
             handleBlur={handleBlur}
+            setFieldValue={setFieldValue}
+            setFieldTouched={setFieldTouched}
           />
         );
       case 4:
@@ -112,6 +115,8 @@ export const RecruitmentForm = () => {
             values={values}
             handleChange={handleChange}
             handleBlur={handleBlur}
+            setFieldValue={setFieldValue}
+            setFieldTouched={setFieldTouched}
           />
         );
       case 5:
