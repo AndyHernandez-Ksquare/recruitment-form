@@ -301,7 +301,7 @@ export const ExtraPersonalInfo = ({
                       ? errors.proofOfLicense
                       : values.proofOfLicense
                       ? "File uploaded!"
-                      : "Upload Proof of Degree"}
+                      : "Upload Proof of License"}
                   </Button>
                 </InputLabel>
               </Box>
