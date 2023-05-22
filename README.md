@@ -1,5 +1,1 @@
-## Notes
-
-Remember to install Material UI, Yup, Formik and Storybook.
-
-Goodluck!
+[See Live](https://recruitmentform.netlify.app/)
