@@ -1,1 +1,2 @@
-export { AddressExtraInfo } from "./AddressExtraInfo";
+import { AddressExtraInfo } from "./AddressExtraInfo";
+export { AddressExtraInfo };

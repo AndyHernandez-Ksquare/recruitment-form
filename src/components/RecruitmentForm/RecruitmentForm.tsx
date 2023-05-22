@@ -213,7 +213,6 @@ export const RecruitmentForm = () => {
           Submit
         </Button>
         <ModalForm formValues={formSubmitted} />
-
       </form>
     </Box>
   );
