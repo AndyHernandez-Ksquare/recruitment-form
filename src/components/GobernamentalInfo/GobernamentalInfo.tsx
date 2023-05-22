@@ -7,6 +7,7 @@ import {
   Input,
   InputLabel,
 } from "@mui/material";
+
 import { GobernamentalInfoProps } from "../../interfaces/GobernamentalInfo";
 export const GobernamentalInfo = ({
   errors,
@@ -28,6 +29,7 @@ export const GobernamentalInfo = ({
         marginTop: -20,
       }}
     >
+
       {values.country.toLowerCase() === "mexico" ? (
         <TextField
           id="identificationCurp"
@@ -95,5 +97,6 @@ export const GobernamentalInfo = ({
         </Button>
       </InputLabel>
     </Box>
+
   );
 };

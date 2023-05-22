@@ -6,8 +6,9 @@ import {
   InputLabel,
   FormControl,
   Box,
-} from "@mui/material";
-import { AddressExtraInfoProps } from "../../interfaces/AddressExtraInfo";
+=======
+  Typography,
+
 
 export const AddressExtraInfo = ({
   errors,
@@ -87,5 +88,6 @@ export const AddressExtraInfo = ({
         </Select>
       </FormControl>
     </Box>
+
   );
 };

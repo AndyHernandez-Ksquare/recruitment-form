@@ -2,6 +2,7 @@ import React from "react";
 import { BankAccountInfoProps } from "../../interfaces/BankAccountInfo";
 import { Box, TextField } from "@mui/material";
 
+
 export const BankAccountInfo = ({
   errors,
   touched,
@@ -13,6 +14,7 @@ export const BankAccountInfo = ({
     <Box
       sx={{ display: "flex", flexDirection: "column", gap: 1, marginTop: -30 }}
     >
+
       <TextField
         id="accountNumber"
         name="accountNumber"
@@ -43,5 +45,6 @@ export const BankAccountInfo = ({
         onChange={handleChange}
       />
     </Box>
+
   );
 };

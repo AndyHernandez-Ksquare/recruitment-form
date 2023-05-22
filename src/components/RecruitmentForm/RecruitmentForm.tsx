@@ -28,6 +28,7 @@ export const RecruitmentForm = () => {
 
   const formik = useFormik<FormValues>({
     initialValues: valuesForm,
+
     validationSchema: validationSchema,
     onSubmit: (value) => {
       setFormSubmitted(value);
@@ -212,6 +213,7 @@ export const RecruitmentForm = () => {
           Submit
         </Button>
         <ModalForm formValues={formSubmitted} />
+
       </form>
     </Box>
   );

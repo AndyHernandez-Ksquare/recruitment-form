@@ -28,4 +28,3 @@ export interface GobernamentalInfoProps {
     touched?: boolean | undefined,
     shouldValidate?: boolean | undefined
   ) => Promise<void> | Promise<FormikErrors<GobernamentalInfoValues>>;
-}
