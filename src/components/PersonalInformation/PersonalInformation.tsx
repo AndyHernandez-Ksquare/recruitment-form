@@ -12,8 +12,6 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { PersonalInformationProps } from "../../interfaces/PersonalInformation";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-// import { PickerChangeHandler } from '@mui/x-date-pickers/internals/hooks/usePicker/usePickerValue';
-
 export const PersonalInformation = ({
   errors,
   touched,
@@ -102,7 +100,6 @@ export const PersonalInformation = ({
         {/* Create a wrapper to pass the the handleChange, do not pass it directly
       I will need to adapt the format of the value to the format formk is waiting in the handleChange handler*/}
         <DatePicker
-          // defaultValue={dayjs("2022-04-17")}
           label="Date of birth"
           value={values.date_of_birth}
           onChange={(newValue) => {

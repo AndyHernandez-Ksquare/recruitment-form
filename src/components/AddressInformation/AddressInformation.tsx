@@ -18,7 +18,6 @@ export const AddressInformation = ({
   setFieldValue,
   setFieldTouched,
 }: AddressInformationProps) => {
-  console.log(values.addressProof);
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography variant="h6">

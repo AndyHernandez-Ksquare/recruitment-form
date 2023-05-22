@@ -45,7 +45,6 @@ export const RecruitmentForm = () => {
     setFieldValue,
     setFieldTouched,
   } = formik;
-  // console.log(formSubmitted);
 
   const steps = [
     "Personal Information",

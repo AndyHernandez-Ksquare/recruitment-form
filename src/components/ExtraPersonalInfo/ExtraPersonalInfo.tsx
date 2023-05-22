@@ -25,7 +25,6 @@ export const ExtraPersonalInfo = ({
     <Box
       sx={{
         width: 800,
-        // marginTop: -15,
         display: "flex",
         flexDirection: "column",
         gap: 1,
@@ -115,7 +114,6 @@ export const ExtraPersonalInfo = ({
           id="highestDegree_select"
           name="highestDegree"
           value={values.highestDegree}
-          // label="How did you find about us?"
           onChange={handleChange}
         >
           <MenuItem value="Highschool_or_equivalent">

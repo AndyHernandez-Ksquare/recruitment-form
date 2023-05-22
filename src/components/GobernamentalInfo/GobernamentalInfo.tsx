@@ -18,7 +18,6 @@ export const GobernamentalInfo = ({
   setFieldValue,
   setFieldTouched,
 }: GobernamentalInfoProps) => {
-  console.log(values.identificationProof);
   return (
     <Box
       sx={{
@@ -29,7 +28,6 @@ export const GobernamentalInfo = ({
         marginTop: -20,
       }}
     >
-
       {values.country.toLowerCase() === "mexico" ? (
         <TextField
           id="identificationCurp"
@@ -97,6 +95,5 @@ export const GobernamentalInfo = ({
         </Button>
       </InputLabel>
     </Box>
-
   );
 };
